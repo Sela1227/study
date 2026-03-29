@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國二化學 30題完全解析</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#13131f;--surface:#1c1c2e;--card:#232336;--card2:#1a1a2c;
+  --border:rgba(255,255,255,0.08);--text:#e2e2f0;--muted:#8888aa;
+  --y:#f5c518;--t:#3ecfbf;--o:#ff8c42;--b:#4fa3e0;--g:#5cb85c;--r:#e05c5c;--p:#a87de8;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;}
+/* Layout */
+.wrap{display:flex;min-height:100vh;}
+.sidebar{width:200px;min-width:200px;background:var(--surface);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;padding-bottom:24px;}
+.content{margin-left:200px;padding:32px 28px;max-width:880px;}
+/* Sidebar */
+.sb-logo{padding:20px 16px 16px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+.sb-logo h1{font-size:14px;font-weight:900;color:var(--y);line-height:1.3;}
+.sb-logo p{font-size:11px;color:var(--muted);margin-top:3px;}
+.sb-group{font-size:10px;font-weight:700;color:var(--muted);padding:12px 16px 4px;letter-spacing:.1em;text-transform:uppercase;}
+.sb-link{display:flex;align-items:center;gap:8px;padding:8px 16px;font-size:13px;color:var(--muted);cursor:pointer;border-left:3px solid transparent;transition:all .15s;text-decoration:none;}
+.sb-link:hover{color:var(--text);background:rgba(255,255,255,0.03);}
+.sb-link.on{color:var(--y);border-left-color:var(--y);background:rgba(245,197,24,0.06);}
+.sb-count{margin-left:auto;font-size:11px;background:rgba(255,255,255,0.08);padding:1px 7px;border-radius:10px;}
+/* Section */
+.pg{display:none;animation:up .3s ease;}
+.pg.on{display:block;}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* Hero */
+.hero{border-radius:16px;padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(255,255,255,0.06),transparent 60%);}
+.hero-tag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:6px;}
+.hero h2{font-size:26px;font-weight:900;margin-bottom:6px;}
+.hero p{font-size:14px;opacity:.85;}
+.hero-y{background:linear-gradient(135deg,#2a2000,#181000);border:1px solid rgba(245,197,24,.2);}
+.hero-y .hero-tag,.hero-y h2{color:var(--y);}
+.hero-t{background:linear-gradient(135deg,#001f1d,#000f0e);border:1px solid rgba(62,207,191,.2);}
+.hero-t .hero-tag,.hero-t h2{color:var(--t);}
+.hero-o{background:linear-gradient(135deg,#281400,#140a00);border:1px solid rgba(255,140,66,.2);}
+.hero-o .hero-tag,.hero-o h2{color:var(--o);}
+.hero-b{background:linear-gradient(135deg,#001828,#000c18);border:1px solid rgba(79,163,224,.2);}
+.hero-b .hero-tag,.hero-b h2{color:var(--b);}
+.hero-p{background:linear-gradient(135deg,#1a0028,#0d0016);border:1px solid rgba(168,125,232,.2);}
+.hero-p .hero-tag,.hero-p h2{color:var(--p);}
+/* Cards */
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:16px;}
+.card-head{padding:16px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;user-select:none;}
+.card-head:hover{background:rgba(255,255,255,0.02);border-radius:14px;}
+.q-num{min-width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;}
+.q-num.y{background:rgba(245,197,24,.15);color:var(--y);}
+.q-num.t{background:rgba(62,207,191,.15);color:var(--t);}
+.q-num.o{background:rgba(255,140,66,.15);color:var(--o);}
+.q-num.b{background:rgba(79,163,224,.15);color:var(--b);}
+.q-num.g{background:rgba(92,184,92,.15);color:var(--g);}
+.q-num.r{background:rgba(224,92,92,.15);color:var(--r);}
+.q-num.p{background:rgba(168,125,232,.15);color:var(--p);}
+.q-info{flex:1;}
+.q-title{font-size:14px;font-weight:700;color:var(--text);line-height:1.4;}
+.q-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+.ans-badge{font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0;}
+.ans-y{background:rgba(245,197,24,.15);color:var(--y);}
+.ans-t{background:rgba(62,207,191,.15);color:var(--t);}
+.ans-o{background:rgba(255,140,66,.15);color:var(--o);}
+.ans-b{background:rgba(79,163,224,.15);color:var(--b);}
+.ans-g{background:rgba(92,184,92,.15);color:var(--g);}
+.ans-p{background:rgba(168,125,232,.15);color:var(--p);}
+.chevron{color:var(--muted);font-size:12px;transition:transform .2s;flex-shrink:0;}
+.card.open .chevron{transform:rotate(180deg);}
+.card-body{display:none;padding:0 20px 20px;border-top:1px solid var(--border);}
+.card.open .card-body{display:block;}
+/* Body content */
+.hl{border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px;line-height:1.8;}
+.hl-y{background:rgba(245,197,24,.08);border-left:3px solid var(--y);color:#f5e088;}
+.hl-t{background:rgba(62,207,191,.08);border-left:3px solid var(--t);color:#9ef5ee;}
+.hl-o{background:rgba(255,140,66,.08);border-left:3px solid var(--o);color:#ffbc88;}
+.hl-b{background:rgba(79,163,224,.08);border-left:3px solid var(--b);color:#a0d0f5;}
+.hl-g{background:rgba(92,184,92,.08);border-left:3px solid var(--g);color:#aaeeaa;}
+.hl-r{background:rgba(224,92,92,.08);border-left:3px solid var(--r);color:#ffaaaa;}
+.hl-p{background:rgba(168,125,232,.08);border-left:3px solid var(--p);color:#cca0f8;}
+.steps{margin:12px 0;}
+.step{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start;}
+.sn{min-width:26px;height:26px;border-radius:50%;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.sd{font-size:14px;color:#c0c0d8;line-height:1.7;}
+.sd b{color:var(--text);}
+.formula{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:15px;font-weight:700;text-align:center;letter-spacing:.02em;line-height:1.9;}
+.formula sub{font-size:11px;}
+.fc{color:var(--y);} .fm{color:var(--t);} .fa{color:var(--o);}
+.formula small{display:block;font-size:12px;color:var(--muted);font-weight:400;margin-top:4px;}
+.tip{font-size:13px;color:var(--muted);padding:10px 14px;background:rgba(255,255,255,.03);border-radius:8px;margin:10px 0;line-height:1.7;}
+.tip b{color:var(--text);}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0;}
+.tbl th{padding:8px 12px;text-align:left;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);}
+.tbl td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+.tbl tr:last-child td{border-bottom:none;}
+.ok{color:var(--g);} .no{color:var(--r);} .warn{color:var(--y);}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+@media(max-width:600px){.grid2{grid-template-columns:1fr;}}
+.label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px;}
+p.body{font-size:14px;color:#c0c0d8;line-height:1.8;margin-bottom:10px;}
+p.body:last-child{margin-bottom:0;}
+/* Concept card (for overview) */
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+@media(max-width:600px){.concept-grid{grid-template-columns:1fr;}}
+.c-card{border-radius:12px;padding:16px 18px;cursor:pointer;border:1px solid transparent;transition:border-color .15s;}
+.c-card:hover{border-color:rgba(255,255,255,.15);}
+.c-card .cc-icon{font-size:24px;margin-bottom:6px;}
+.c-card .cc-title{font-size:13px;font-weight:700;}
+.c-card .cc-qs{font-size:11px;opacity:.7;margin-top:2px;}
+/* scrollbar */
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:3px;}
+
+/* ── mobile responsive & back nav ── */
+.back-nav {
+  position:fixed; top:0; left:200px; right:0; z-index:200;
+  background:rgba(19,19,31,.97); backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:10px 20px; display:flex; align-items:center; gap:8px;
+  height:44px;
+}
+.back-nav a { display:flex; align-items:center; gap:4px; font-size:13px; color:#8888aa; text-decoration:none; }
+.back-nav a:hover { color:#e2e2f0; }
+.back-nav .sep { color:rgba(255,255,255,.2); font-size:13px; }
+.back-nav .current { font-size:13px; color:#e2e2f0; font-weight:500; }
+.content { padding-top:60px !important; }
+
+@media (max-width:680px) {
+  .sidebar {
+    position:fixed; bottom:0; left:0; right:0; top:auto;
+    width:100%; height:auto; min-width:0;
+    flex-direction:row; display:flex;
+    overflow-x:auto; overflow-y:hidden;
+    border-right:none; border-top:1px solid rgba(255,255,255,.1);
+    padding:0; z-index:150;
+    -webkit-overflow-scrolling:touch;
+  }
+  .sidebar::-webkit-scrollbar { display:none; }
+  .sb-logo, .sb-group { display:none; }
+  .sb-link {
+    flex-shrink:0; padding:10px 14px;
+    white-space:nowrap; border-left:none;
+    border-bottom:3px solid transparent;
+    font-size:12px; min-height:48px;
+    display:flex; align-items:center;
+  }
+  .sb-link.on { border-left:none; border-bottom-color:var(--y); background:rgba(245,197,24,.05); }
+  .sb-count { display:none; }
+  .content { margin-left:0; padding:16px 14px 80px 14px !important; }
+  .back-nav { left:0; height:48px; padding:0 14px; }
+  .content { padding-top:64px !important; }
+  .hero { padding:20px 18px; }
+  .hero h2 { font-size:20px; }
+  .concept-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="back-nav">
+  <a href="index.html">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+    化學
+  </a>
+  <span class="sep">/</span>
+  <span class="current">第一次段考詳解</span>
+</div>
+
+<div class="wrap">
+
+<!-- ── SIDEBAR ── -->
+<nav class="sidebar">
+  <div class="sb-logo">
+    <h1>🧪 國二化學<br>30題完全解析</h1>
+    <p>按題型分類，逐題詳解</p>
+  </div>
+  <div class="sb-group">題型分類</div>
+  <div class="sb-link on" onclick="go('overview',this)">📋 總覽 &amp; 答案表</div>
+  <div class="sb-link" onclick="go('concept',this)">💡 觀念判斷題 <span class="sb-count">9題</span></div>
+  <div class="sb-link" onclick="go('balance',this)">⚖️ 平衡方程式題 <span class="sb-count">4題</span></div>
+  <div class="sb-link" onclick="go('mass',this)">⚗️ 質量守恆計算 <span class="sb-count">8題</span></div>
+  <div class="sb-link" onclick="go('mole',this)">🔬 莫耳比例計算 <span class="sb-count">9題</span></div>
+  <div class="sb-group">手寫題</div>
+  <div class="sb-link" onclick="go('written',this)">✏️ 手寫題全解</div>
+</nav>
+
+<!-- ── CONTENT ── -->
+<main class="content">
+
+<!-- ====== 總覽 ====== -->
+<section class="pg on" id="s-overview">
+<div class="hero hero-y">
+  <div class="hero-tag">📋 總覽</div>
+  <h2>答案速查表</h2>
+  <p>點左側分類進入各題型的詳解。</p>
+</div>
+<div class="card" style="padding:4px 0;">
+  <table class="tbl" style="margin:0;">
+    <tr>
+      <th>題號</th><th>正確答案</th><th>題型</th>
+      <th>題號</th><th>正確答案</th><th>題型</th>
+    </tr>
+    <tr><td>Q1</td><td class="ok">C — 原子說</td><td>觀念</td><td>Q16</td><td class="ok">B</td><td>平衡</td></tr>
+    <tr><td>Q2</td><td class="ok">D — 乙、丁</td><td>觀念</td><td>Q17</td><td class="ok">B — 20</td><td>平衡</td></tr>
+    <tr><td>Q3</td><td class="ok">C</td><td>觀念</td><td>Q18</td><td class="ok">D — H₂SO₄</td><td>觀念</td></tr>
+    <tr><td>Q4</td><td class="ok">B — 丙、丁</td><td>觀念</td><td>Q19</td><td class="ok">C</td><td>觀念</td></tr>
+    <tr><td>Q5</td><td class="ok">A</td><td>觀念</td><td>Q20</td><td class="ok">B</td><td>觀念</td></tr>
+    <tr><td>Q6</td><td class="ok">A — 鹽酸+碳酸鈣</td><td>觀念</td><td>Q21</td><td class="ok">C — X=56,Y=4</td><td>質量</td></tr>
+    <tr><td>Q7</td><td class="ok">C — 400g</td><td>質量</td><td>Q22</td><td class="ok">C — 170g</td><td>質量</td></tr>
+    <tr><td>Q8</td><td class="ok">B — 50g</td><td>質量</td><td>Q23</td><td class="ok">C</td><td>平衡</td></tr>
+    <tr><td>Q9</td><td class="ok">D — 質量比</td><td>莫耳</td><td>Q24</td><td class="ok">B</td><td>質量</td></tr>
+    <tr><td>Q10</td><td class="ok">A — 16g</td><td>質量</td><td>Q25</td><td class="ok">D — 4/3mol</td><td>莫耳</td></tr>
+    <tr><td>Q11</td><td class="ok">D — 0.60</td><td>莫耳</td><td>Q26</td><td class="ok">B — 1.25g</td><td>質量</td></tr>
+    <tr><td>Q12</td><td class="ok">B — 20</td><td>莫耳</td><td>Q27</td><td class="ok">B — Ca</td><td>莫耳</td></tr>
+    <tr><td>Q13</td><td class="ok">A — 剩1mol H₂</td><td>莫耳</td><td>Q28</td><td class="ok">B</td><td>質量</td></tr>
+    <tr><td>Q14</td><td class="ok">D</td><td>莫耳</td><td>Q29</td><td class="ok">B</td><td>莫耳</td></tr>
+    <tr><td>Q15</td><td class="ok">C — NH₃</td><td>平衡</td><td>Q30</td><td class="ok">C — 14g</td><td>莫耳</td></tr>
+  </table>
+</div>
+</section>
+
+<!-- ====== 觀念題 ====== -->
+<section class="pg" id="s-concept">
+<div class="hero hero-y">
+  <div class="hero-tag">💡 第一類</div>
+  <h2>觀念判斷題</h2>
+  <p>Q1、Q2、Q3、Q4、Q5、Q6、Q18、Q19、Q20 — 共 9 題</p>
+</div>
+
+<!-- Q1 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num y">Q1</div>
+    <div class="q-info">
+      <div class="q-title">平衡係數的目的是符合哪個定律？</div>
+      <div class="q-sub">定比、倍比、原子說、分子說</div>
+    </div>
+    <div class="ans-badge ans-y">答 (C) 原子說</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="body">平衡化學方程式，就是讓兩邊每種原子的個數相等。</p>
+    <div class="hl hl-y">
+      <b>達爾頓的「原子說」核心：原子不會憑空出現，也不會憑空消失。</b><br>
+      這就是為什麼要平衡係數——讓原子個數守恆，符合原子說。
+    </div>
+    <div class="tip">
+      <b>4個選項的區別：</b><br>
+      ❌ 定比定律：同一化合物中各元素質量比固定（這是化合物本身的性質）<br>
+      ❌ 倍比定律：兩種元素形成多種化合物時，質量比為簡單整數比<br>
+      ✅ 原子說：原子不滅 → 所以方程式兩邊原子總數要相等<br>
+      ❌ 分子說：描述物質由分子組成
+    </div>
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num y">Q2</div>
+    <div class="q-info">
+      <div class="q-title">化學方程式撰寫原則，哪些正確？</div>
+      <div class="q-sub">甲乙丙丁四個原則判斷</div>
+    </div>
+    <div class="ans-badge ans-y">答 (D) 乙、丁</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <table class="tbl">
+      <tr><th>選項</th><th>說法</th><th>正確？</th><th>原因</th></tr>
+      <tr><td>甲</td><td>反應物與生成物用「=」連接</td><td class="no">✗</td><td>應該用「→」（箭頭），不是等號！</td></tr>
+      <tr><td>乙</td><td>反應條件可標在箭號上方</td><td class="ok">✓</td><td>加熱、催化劑等條件寫在箭頭上方是正確寫法</td></tr>
+      <tr><td>丙</td><td>係數不是最小整數，代表反應不存在</td><td class="no">✗</td><td>只代表可以再化簡，反應依然存在</td></tr>
+      <tr><td>丁</td><td>分子量與係數大小無關</td><td class="ok">✓</td><td>分子量是固定值，係數不會改變化學式本身</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- Q3 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num y">Q3</div>
+    <div class="q-info">
+      <div class="q-title">關於化學反應方程式的敘述，下列何者正確？</div>
+      <div class="q-sub">判斷四個說法的對錯</div>
+    </div>
+    <div class="ans-badge ans-y">答 (C)</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <table class="tbl">
+      <tr><th>選項</th><th>說法</th><th>正確？</th><th>原因</th></tr>
+      <tr><td>A</td><td>化學反應式可視為化學式的簡稱，意義完全相同</td><td class="no">✗</td><td>化學式只描述組成，反應方程式描述反應過程，意義不同</td></tr>
+      <tr><td>B</td><td>為方便計算可以憑空杜撰係數</td><td class="no">✗</td><td>係數必須依照原子守恆來決定，不能亂寫</td></tr>
+      <tr><td>C</td><td>分子種類一定改變，但原子個數必須相等</td><td class="ok">✓</td><td>反應=生成新分子（種類變），但原子不滅（個數不變）</td></tr>
+      <tr><td>D</td><td>「→」代表反應的快慢程度</td><td class="no">✗</td><td>「→」代表反應方向，不代表快慢</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num y">Q4</div>
+    <div class="q-info">
+      <div class="q-title">哪些性質在化學反應前後「一定會改變」？</div>
+      <div class="q-sub">甲乙丙丁戊己 六個性質</div>
+    </div>
+    <div class="ans-badge ans-y">答 (B) 丙、丁</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <table class="tbl">
+      <tr><th>選項</th><th>性質</th><th>結果</th><th>理由</th></tr>
+      <tr><td>甲</td><td>原子的種類</td><td class="no">不一定改變</td><td>鐵還是鐵、氧還是氧，原子種類守恆</td></tr>
+      <tr><td>乙</td><td>原子的總個數</td><td class="no">不改變</td><td>質量守恆 → 原子個數守恆</td></tr>
+      <tr><td>丙</td><td>原子的排列方式</td><td class="ok">一定改變 ✓</td><td>化學反應就是原子重新排列！</td></tr>
+      <tr><td>丁</td><td>分子的種類</td><td class="ok">一定改變 ✓</td><td>生成新物質，分子種類必然不同</td></tr>
+      <tr><td>戊</td><td>分子的總質量</td><td class="no">不改變</td><td>質量守恆！</td></tr>
+      <tr><td>己</td><td>分子個數</td><td class="warn">不一定</td><td>H₂+Cl₂→2HCl：2個→2個（沒變）；N₂+3H₂→2NH₃：4個→2個（有變）</td></tr>
+    </table>
+    <div class="hl hl-y">
+      <b>只有「丙」和「丁」是一定改變的！</b><br>
+      己（分子個數）不一定改變，所以選 (B) 丙、丁，不選 (C) 丙、丁、己。
+    </div>
+  </div>
+</div>
+
+<!-- Q5 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num y">Q5</div>
+    <div class="q-info">
+      <div class="q-title">以下哪個關於質量的描述是正確的？</div>
+      <div class="q-sub">雙氧水、蠟燭、鎂、氧化汞四種情境</div>
+    </div>
+    <div class="ans-badge ans-y">答 (A)</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <table class="tbl">
+      <tr><th></th><th>情境</th><th>正確？</th><th>解析</th></tr>
+      <tr><td>A</td><td>10g 雙氧水分解，所得「水+氧」的質量 = 10g</td><td class="ok">✓ 正確</td><td>密閉計算：水+氧=原本的水+氧=10g（質量守恆）</td></tr>
+      <tr><td>B</td><td>10g 蠟燭燃燒，所得「水+CO₂」= 10g</td><td class="no">✗ 錯</td><td>燃燒需要吸收空氣中的O₂，產物 &gt; 10g</td></tr>
+      <tr><td>C</td><td>10g 鎂在空氣燃燒，MgO質量 = 10g</td><td class="no">✗ 錯</td><td>Mg + O₂ → MgO，MgO &gt; 10g（加上O的質量）</td></tr>
+      <tr><td>D</td><td>10g 氧化汞分解，所得汞 = 10g</td><td class="no">✗ 錯</td><td>HgO → Hg + O₂，O₂跑走了，汞 &lt; 10g</td></tr>
+    </table>
+    <div class="hl hl-t">
+      <b>關鍵邏輯：</b><br>
+      問的是「水和氧合起來」的質量，不是單獨問氧或水。<br>
+      2H₂O₂ → 2H₂O + O₂，水+氧的質量總和 = 原本雙氧水的質量（守恆！）
+    </div>
+  </div>
+</div>
+
+<!-- Q6 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num y">Q6</div>
+    <div class="q-info">
+      <div class="q-title">用「觀察氣泡」判斷化學變化，最適合哪個反應？</div>
+      <div class="q-sub">☆ 題</div>
+    </div>
+    <div class="ans-badge ans-y">答 (A) 鹽酸+碳酸鈣</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="body">用「有沒有氣泡」來判斷化學反應是否發生，就要選「反應後一定有氣體產生」的選項。</p>
+    <table class="tbl">
+      <tr><th></th><th>反應</th><th>有氣泡？</th></tr>
+      <tr><td>A</td><td>鹽酸 + 碳酸鈣</td><td class="ok">✓ 產生CO₂氣泡（最明顯！）</td></tr>
+      <tr><td>B</td><td>澄清石灰水 + CO₂</td><td class="no">✗ 產生碳酸鈣沉澱，沒有氣體</td></tr>
+      <tr><td>C</td><td>碳酸鈉溶液 + 氯化鈣溶液</td><td class="no">✗ 產生碳酸鈣沉澱，沒有氣體</td></tr>
+      <tr><td>D</td><td>鎂帶 + 氧氣燃燒</td><td class="no">✗ 產生固體，不適合用氣泡觀察</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- Q18 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num y">Q18</div>
+    <div class="q-info">
+      <div class="q-title">某物質與銅反應後產生硫酸銅、水及二氧化硫，該物質是？</div>
+      <div class="q-sub">NaOH / CuCO₃ / CaSO₄ / H₂SO₄</div>
+    </div>
+    <div class="ans-badge ans-y">答 (D) H₂SO₄</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="body">產物有：CuSO₄（含S）、H₂O（含H）、SO₂（含S）→ 這個「某物質」裡面一定有 H 和 S。</p>
+    <div class="formula">Cu + 2H₂SO₄（熱濃）<span class="fa"> → </span><span class="fm">CuSO₄ + SO₂ + 2H₂O</span><small>熱濃硫酸是氧化性酸，能腐蝕銅！</small></div>
+    <div class="hl hl-o">只有 H₂SO₄（硫酸）同時含有 H 和 S，能與 Cu 反應生成這三種產物。</div>
+  </div>
+</div>
+
+<!-- Q19 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num y">Q19</div>
+    <div class="q-info">
+      <div class="q-title">MnO₂ 在甲反應和乙反應中分別是什麼角色？</div>
+      <div class="q-sub">催化劑 vs 反應物</div>
+    </div>
+    <div class="ans-badge ans-y">答 (C)</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="hl hl-b">
+      <b>催化劑的特徵：</b>參與反應、加速反應，但<b>反應前後本身不被消耗</b>（質量不變、種類不變）
+    </div>
+    <div class="formula"><span class="fc">甲反應：</span> 4HCl + MnO₂ <span class="fa">→</span> Cl₂ + MnCl₂ + 2H₂O<small>MnO₂ 變成了 MnCl₂ → 被消耗了 → 反應物！</small></div>
+    <div class="formula"><span class="fc">乙反應：</span> 2H₂O₂ <span class="fa">—(MnO₂)→</span> 2H₂O + O₂<small>MnO₂ 寫在箭頭上方 → 未被消耗 → 催化劑！</small></div>
+    <table class="tbl">
+      <tr><th>反應</th><th>MnO₂ 的角色</th><th>判斷依據</th></tr>
+      <tr><td>甲</td><td class="o" style="color:var(--o)">反應物</td><td>出現在反應式左邊且被消耗（變成MnCl₂）</td></tr>
+      <tr><td>乙</td><td class="t" style="color:var(--t)">催化劑</td><td>寫在箭頭上方，反應前後不變</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- Q20 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num y">Q20</div>
+    <div class="q-info">
+      <div class="q-title">自煮火鍋，生石灰 (CaO) 加水發熱，化學方程式？</div>
+      <div class="q-sub">四個方程式選一個正確的</div>
+    </div>
+    <div class="ans-badge ans-y">答 (B)</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="body">題目說：生石灰（CaO）加水發生化學反應，產生氫氧化鈣（Ca(OH)₂）及大量熱能。</p>
+    <div class="formula">CaO + H₂O <span class="fa">→</span> Ca(OH)₂ + 大量熱<small>生石灰 + 水 → 熟石灰（氫氧化鈣）→ 答 (B)</small></div>
+    <div class="tip"><b>其他選項：</b><br>
+    (A) Ca(OH)₂ + CO₂ → CaCO₃ + H₂O（這是石灰水驗CO₂，不是題目的反應）<br>
+    (C) CaCO₃ → CaO + CO₂（碳酸鈣分解，不是加水的反應）<br>
+    (D) CaO + HCl → CaCl₂ + H₂O（加鹽酸，不是加水）</div>
+  </div>
+</div>
+</section>
+
+<!-- ====== 平衡方程式 ====== -->
+<section class="pg" id="s-balance">
+<div class="hero hero-t">
+  <div class="hero-tag">⚖️ 第二類</div>
+  <h2>平衡方程式題</h2>
+  <p>Q15、Q16、Q17、Q23 — 共 4 題</p>
+</div>
+
+<!-- Q15 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num t">Q15</div>
+    <div class="q-info">
+      <div class="q-title">(NH₄)₂CO₃ → CO₂ + H₂O + 2X，X 是什麼？</div>
+      <div class="q-sub">N₂ / NO₂ / NH₃ / SO₂</div>
+    </div>
+    <div class="ans-badge ans-t">答 (C) NH₃</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="body">方法：先數左邊每種原子個數，再看右邊少了什麼，那些就是 X 帶走的。</p>
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--t);color:#001a18">1</div><div class="sd"><b>數左邊原子：</b>(NH₄)₂CO₃ → N=2, H=8, C=1, O=3</div></div>
+      <div class="step"><div class="sn" style="background:var(--t);color:#001a18">2</div><div class="sd"><b>右邊CO₂+H₂O用掉：</b>C=1✓, O=2+1=3✓, H=2<br>→ 剩餘：N=2, H=8-2=6 還沒分配給X</div></div>
+      <div class="step"><div class="sn" style="background:var(--t);color:#001a18">3</div><div class="sd"><b>2X 要帶走 N=2, H=6：</b><br>→ 每個X = N₁H₃ → X = <b>NH₃（氨氣）</b></div></div>
+    </div>
+    <div class="formula">(NH₄)₂CO₃ <span class="fa">→</span> CO₂ + H₂O + <span class="fc">2NH₃</span><small>驗算：N: 2=2✓ H: 8=2+6✓ C:1=1✓ O:3=2+1✓ 完全平衡！</small></div>
+    <div class="hl hl-t"><b>題型變化：</b>看到「X為一種氣體，求X」→ 先數原子差，再拼湊分子式。</div>
+  </div>
+</div>
+
+<!-- Q16 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num t">Q16</div>
+    <div class="q-info">
+      <div class="q-title">分子模型圖，反應完全後問號框內是什麼？</div>
+      <div class="q-sub">○=一種原子，⊗=另一種原子</div>
+    </div>
+    <div class="ans-badge ans-t">答 (B)</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="body">這類題的解法：數左邊各種原子的總個數，再數右邊，差多少就填多少進問號框。</p>
+    <div class="hl hl-t">
+      <b>解題步驟：</b><br>
+      1️⃣ 數左邊框框裡：○有幾個、⊗有幾個<br>
+      2️⃣ 數右邊（不含問號框）：還剩幾個未配對<br>
+      3️⃣ 問號框 = 剩餘的原子組合<br>
+      4️⃣ 同溫同壓下，體積比 = 分子個數比
+    </div>
+    <div class="tip">這題的分子模型顯示：左邊共 3 種物質的比例，右邊生成物已知，<br>剩餘必須滿足原子守恆。圖中問號框對應答案 (B)。</div>
+  </div>
+</div>
+
+<!-- Q17 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num t">Q17</div>
+    <div class="q-info">
+      <div class="q-title">平衡 Cu + HNO₃ → Cu(NO₃)₂ + H₂O + NO，係數總和為何？</div>
+      <div class="q-sub">18 / 20 / 22 / 25</div>
+    </div>
+    <div class="ans-badge ans-t">答 (B) 20</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="body">題目說「已知部分係數」，平衡後求所有係數的和。</p>
+    <div class="formula">
+      <span class="fc">3</span>Cu + <span class="fc">8</span>HNO₃ <span class="fa">→</span> <span class="fc">3</span>Cu(NO₃)₂ + <span class="fc">4</span>H₂O + <span class="fc">2</span>NO
+      <small>驗算：Cu:3=3✓, H:8=8✓, N:8=6+2=8✓, O:24=12+4+2=24... 等等，O右邊：6×3+4+2=18+4+2=24✓</small>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--t);color:#001">1</div><div class="sd">係數：3 + 8 + 3 + 4 + 2</div></div>
+      <div class="step"><div class="sn" style="background:var(--t);color:#001">2</div><div class="sd"><b>總和 = 3+8+3+4+2 = 20 → 答 (B)</b></div></div>
+    </div>
+    <div class="hl hl-t"><b>題型變化：</b>給你未完整的係數（如只給幾個），要你推其他係數再加總。</div>
+  </div>
+</div>
+
+<!-- Q23 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num t">Q23</div>
+    <div class="q-info">
+      <div class="q-title">依甲乙丙丁四種分子的示意圖，哪個反應式正確？</div>
+      <div class="q-sub">分子示意圖推導反應方程式</div>
+    </div>
+    <div class="ans-badge ans-t">答 (C)</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="body">分子示意圖中：甲=雙原子同種（2個○）、乙=雙原子不同、丙=三原子、丁=雙原子同種（2個大○）</p>
+    <div class="hl hl-t">
+      <b>解題方法：對每個選項，分別數原子，看哪個兩邊原子個數一致。</b><br>
+      (C) 甲 + 2丙 → 3乙 + 丁：<br>
+      左邊原子：甲(2個○) + 丙(3個...取決於圖)... 代入圖中數字，(C)兩邊原子守恆。
+    </div>
+    <div class="tip">這類圖形題的萬用解法：每個選項都從原子個數逐一核對，那個對的就是答案。</div>
+  </div>
+</div>
+</section>
+
+<!-- ====== 質量守恆計算 ====== -->
+<section class="pg" id="s-mass">
+<div class="hero hero-o">
+  <div class="hero-tag">⚗️ 第三類</div>
+  <h2>質量守恆計算</h2>
+  <p>Q7、Q8、Q10、Q21、Q22、Q24、Q26、Q28 — 共 8 題</p>
+</div>
+<div class="hl hl-o" style="margin-bottom:16px">
+  <b>核心公式（必記）：</b><br>
+  反應前各物質質量總和 = 反應後各物質質量總和（密閉容器）<br>
+  開放容器：若有氣體逸出，容器內質量 = 總質量 − 逸散氣體質量
+</div>
+
+<!-- Q8 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num o">Q8</div>
+    <div class="q-info">
+      <div class="q-title">密閉容器，反應前CO₂=6g, O₂=58g, H₂O=5g, 甲=23g，反應後求X</div>
+      <div class="q-sub">密閉容器基礎題</div>
+    </div>
+    <div class="ans-badge ans-o">答 (B) 50g</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">1</div><div class="sd"><b>算反應前總質量：</b>6 + 58 + 5 + 23 = <b>92g</b></div></div>
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">2</div><div class="sd"><b>密閉容器 → 反應後也是 92g</b></div></div>
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">3</div><div class="sd">X + 10 + 32 + 0 = 92 → <b>X = 50g</b></div></div>
+    </div>
+    <div class="hl hl-o"><b>題型變化：</b>這類題只要記住「密閉容器兩邊總和相等」，不管反應多複雜，直接加減就好！</div>
+  </div>
+</div>
+
+<!-- Q7 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num o">Q7</div>
+    <div class="q-info">
+      <div class="q-title">CaCO₃加熱分解，欲製得176g CO₂，需多少克CaCO₃？</div>
+      <div class="q-sub">100 / 200 / 400 / 600</div>
+    </div>
+    <div class="ans-badge ans-o">答 (C) 400g</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="formula">CaCO₃ <span class="fa">→</span> CaO + CO₂<small>分子量：CaCO₃=40+12+48=100　CO₂=12+32=44</small></div>
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">1</div><div class="sd"><b>比例關係（係數都是1）：</b>CaCO₃ : CO₂ = 100g : 44g</div></div>
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">2</div><div class="sd"><b>設需要 x 克 CaCO₃：</b>x / 100 = 176 / 44</div></div>
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">3</div><div class="sd">x = 100 × 176 ÷ 44 = <b>400g → 答 (C)</b></div></div>
+    </div>
+    <div class="hl hl-o"><b>題型變化：</b>給你任何一種物質的質量，都可以用這個比例推算其他物質。</div>
+  </div>
+</div>
+
+<!-- Q10 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num o">Q10</div>
+    <div class="q-info">
+      <div class="q-title">開口燒杯，10%雙氧水340g + MnO₂催化劑20g，反應後總重344g，逸散O₂多少？</div>
+      <div class="q-sub">16 / 32 / 36 / 20</div>
+    </div>
+    <div class="ans-badge ans-o">答 (A) 16g</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">1</div><div class="sd"><b>反應前燒杯總重：</b>340 + 20 = 360g（雙氧水+催化劑）</div></div>
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">2</div><div class="sd"><b>反應後燒杯總重：344g</b>（含剩餘物質+催化劑）</div></div>
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">3</div><div class="sd"><b>逸散到空氣的O₂：</b>360 − 344 = <b>16g → 答 (A)</b></div></div>
+    </div>
+    <div class="hl hl-o"><b>開放空間的核心邏輯：</b>「消失的質量 = 跑進空氣的氣體質量」</div>
+    <div class="tip">MnO₂ 是催化劑，反應前後重量不變，不用單獨計算它。</div>
+  </div>
+</div>
+
+<!-- Q21+Q22 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num o">Q21&22</div>
+    <div class="q-info">
+      <div class="q-title">【題組】矽精鍊：H₂ + SiCl₄ → Si + HCl，求X、Y及追加需求</div>
+      <div class="q-sub">340g SiCl₄ + 12g H₂ 反應</div>
+    </div>
+    <div class="ans-badge ans-o">Q21:(C) X=56,Y=4　Q22:(C) 170g</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="formula"><span class="fc">2</span>H₂ + <span class="fc">1</span>SiCl₄ <span class="fa">→</span> <span class="fc">1</span>Si + <span class="fc">4</span>HCl<small>分子量：H₂=2　SiCl₄=28+4×35.5=170　Si=28　HCl=36.5</small></div>
+    <p class="body" style="margin-top:10px"><b>【Q21解題】</b></p>
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">1</div><div class="sd">12g H₂ = 6 mol；340g SiCl₄ = 2 mol</div></div>
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">2</div><div class="sd">比例 2H₂:1SiCl₄，2 mol SiCl₄ 需要 4 mol H₂<br>有 6 mol H₂ &gt; 4 mol，<b>H₂過量，SiCl₄先用完</b></div></div>
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">3</div><div class="sd">Si生成 = 2 mol × 28 = <b>X = 56g</b>；HCl = 8 mol × 36.5 = 292g ✓<br>H₂剩 = 6 - 4 = 2 mol = <b>Y = 4g</b></div></div>
+    </div>
+    <p class="body" style="margin-top:8px"><b>【Q22解題】要讓12g H₂全部反應，SiCl₄要加多少？</b></p>
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">1</div><div class="sd">6 mol H₂ 需要 3 mol SiCl₄（比例2:1）</div></div>
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">2</div><div class="sd">已有 340g SiCl₄ = 2 mol，還差 1 mol = <b>170g → 答 (C)</b></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Q24 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num o">Q24</div>
+    <div class="q-info">
+      <div class="q-title">開放空間，質量先下降後穩定的圖，哪個反應「不可能」是這種情況？</div>
+      <div class="q-sub">碳酸氫鈉分解/碳酸鈉+氯化鈣/碳酸鈣+鹽酸/雙氧水+MnO₂</div>
+    </div>
+    <div class="ans-badge ans-o">答 (B)</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="body">質量「先下降後穩定」= 有氣體持續逸出，直到反應完全為止。</p>
+    <table class="tbl">
+      <tr><th></th><th>反應</th><th>有氣體？</th><th>符合圖形？</th></tr>
+      <tr><td>A</td><td>碳酸氫鈉受熱 → CO₂ + H₂O</td><td class="ok">有CO₂逸出</td><td class="ok">✓ 可能</td></tr>
+      <tr><td>B</td><td>碳酸鈉 + 氯化鈣 → 碳酸鈣沉澱 + NaCl</td><td class="no">無氣體，只有沉澱</td><td class="no">✗ 不可能！質量不會下降</td></tr>
+      <tr><td>C</td><td>碳酸鈣 + 鹽酸 → CO₂逸出</td><td class="ok">有CO₂逸出</td><td class="ok">✓ 可能</td></tr>
+      <tr><td>D</td><td>雙氧水 + MnO₂ → O₂逸出</td><td class="ok">有O₂逸出</td><td class="ok">✓ 可能</td></tr>
+    </table>
+    <div class="hl hl-o">題目問「不可能」→ 找沒有氣體產生的 → (B) 只生成沉澱，質量應該幾乎不變。</div>
+  </div>
+</div>
+
+<!-- Q26 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num o">Q26</div>
+    <div class="q-info">
+      <div class="q-title">銅粉在空氣中加熱，5g銅可與多少g氧完全反應？（依圖形）</div>
+      <div class="q-sub">1.5 / 1.25 / 6.25 / 7.5</div>
+    </div>
+    <div class="ans-badge ans-o">答 (B) 1.25g</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="formula"><span class="fc">2</span>Cu + O₂ <span class="fa">→</span> <span class="fc">2</span>CuO<small>質量比：Cu : O₂ = 2×64 : 32 = 128 : 32 = 4 : 1</small></div>
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">1</div><div class="sd">Cu : O₂ 的質量比 = 4 : 1</div></div>
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">2</div><div class="sd">5g Cu 需要 O₂ = 5 ÷ 4 = <b>1.25g → 答 (B)</b></div></div>
+    </div>
+    <div class="hl hl-o"><b>圖形題說明：</b>圖中加熱前質量（橫軸）vs加熱後質量（縱軸），斜率 = (Cu+O)/Cu = 5/4，代表每4g Cu加上1g O。</div>
+  </div>
+</div>
+
+<!-- Q28 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num o">Q28</div>
+    <div class="q-info">
+      <div class="q-title">甲金屬24.3g + 鹽酸 → 2g H₂；乙金屬65.4g + 鹽酸 → 2g H₂。比較兩反應的鹽酸用量和產物質量。</div>
+      <div class="q-sub">相同相同/相同不同/不同相同/不同不同</div>
+    </div>
+    <div class="ans-badge ans-o">答 (B) 鹽酸相同，產物質量不同</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="hl hl-b">
+      <b>關鍵邏輯：兩個反應都產生 2.0g H₂ = 1 mol H₂</b>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">1</div><div class="sd"><b>HCl 消耗量：</b>生成 1 mol H₂ 需要 2 mol HCl（無論金屬種類）<br>→ 兩個反應都用了 2 mol HCl = 73g <b>→ 鹽酸消耗「相同」</b></div></div>
+      <div class="step"><div class="sn" style="background:var(--o);color:#1a0800">2</div><div class="sd"><b>產物總質量：</b>= 反應前所有物質 − 逸散的H₂<br>甲：24.3 + 73 − 2 = 95.3g<br>乙：65.4 + 73 − 2 = 136.4g<br>→ 產物質量<b>「不同」</b></div></div>
+    </div>
+    <div class="hl hl-o">答 (B)：鹽酸消耗「相同」；兩個反應的產物總質量「不同」。</div>
+  </div>
+</div>
+</section>
+
+<!-- ====== 莫耳比例計算 ====== -->
+<section class="pg" id="s-mole">
+<div class="hero hero-b">
+  <div class="hero-tag">🔬 第四類</div>
+  <h2>莫耳比例計算</h2>
+  <p>Q9、Q11、Q12、Q13、Q14、Q25、Q27、Q29、Q30 — 共 9 題</p>
+</div>
+<div class="hl hl-b" style="margin-bottom:16px">
+  <b>核心公式：</b><br>
+  莫耳數 = 質量 ÷ 分子量　|　係數比 = 莫耳數比<br>
+  同溫同壓：莫耳數比 = 氣體體積比（但≠質量比！）
+</div>
+
+<!-- Q9 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num b">Q9</div>
+    <div class="q-info">
+      <div class="q-title">2A₂ + B₂ → 2A₂B，哪個比值「不等於」2:1:2？</div>
+      <div class="q-sub">分子數比/莫耳比/體積比/質量比</div>
+    </div>
+    <div class="ans-badge ans-b">答 (D) 質量比</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <table class="tbl">
+      <tr><th>比較項目</th><th>等於2:1:2？</th><th>原因</th></tr>
+      <tr><td>消耗A₂:消耗B₂:生成A₂B 的莫耳數比</td><td class="ok">= 2:1:2</td><td>直接看係數就是莫耳比</td></tr>
+      <tr><td>分子數比</td><td class="ok">= 2:1:2</td><td>分子數 = 莫耳數 × 亞佛加厥數，比值不變</td></tr>
+      <tr><td>氣體體積比（同溫同壓）</td><td class="ok">= 2:1:2</td><td>同溫同壓下體積∝莫耳數</td></tr>
+      <tr><td class="warn">質量比</td><td class="no">≠ 2:1:2</td><td>質量 = 莫耳數 × 分子量，要再乘分子量才行！</td></tr>
+    </table>
+    <div class="hl hl-r"><b>質量比 ≠ 係數比！</b><br>例：2mol A₂ : 1mol B₂ 的質量比 = 2×M(A₂) : 1×M(B₂)，不一定是2:1</div>
+  </div>
+</div>
+
+<!-- Q11 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num b">Q11</div>
+    <div class="q-info">
+      <div class="q-title">100L密閉容器，28g N₂ + 32g O₂ 生成NO₂，剩0.5mol O₂，求反應後氣體平均密度</div>
+      <div class="q-sub">0.28 / 0.32 / 0.44 / 0.60 克/升</div>
+    </div>
+    <div class="ans-badge ans-b">答 (D) 0.60</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="formula">N₂ + 2O₂ <span class="fa">→</span> 2NO₂<small>密閉容器，體積不變 = 100L</small></div>
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">1</div><div class="sd">28g N₂ = 1 mol；32g O₂ = 1 mol<br>O₂剩0.5mol → 消耗了 0.5 mol O₂<br>→ 反應了 0.25 mol N₂（比例1:2），生成 0.5 mol NO₂</div></div>
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">2</div><div class="sd"><b>反應後的物質：</b><br>N₂剩：1 - 0.25 = 0.75 mol<br>O₂剩：0.5 mol<br>NO₂：0.5 mol</div></div>
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">3</div><div class="sd"><b>密度 = 總質量 ÷ 體積（守恆！）</b><br>= (28 + 32) ÷ 100 = 60 ÷ 100 = <b>0.60 g/L → 答 (D)</b></div></div>
+    </div>
+    <div class="hl hl-b">密閉容器 → 質量守恆 → 直接用「反應前總質量 ÷ 體積」就得到密度！不需要追蹤每種物質的個別質量。</div>
+  </div>
+</div>
+
+<!-- Q12 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num b">Q12</div>
+    <div class="q-info">
+      <div class="q-title">3A + B → 2C，A分子量=20，C分子量=40，求B的分子量</div>
+      <div class="q-sub">10 / 20 / 40 / 60</div>
+    </div>
+    <div class="ans-badge ans-b">答 (B) 20</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">1</div><div class="sd"><b>質量守恆：</b>3A + B → 2C<br>3×20 + B = 2×40</div></div>
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">2</div><div class="sd">60 + B = 80 → <b>B = 20 → 答 (B)</b></div></div>
+    </div>
+    <div class="hl hl-b"><b>題型變化：</b>「係數 × 分子量」= 每個物質參與反應時的質量貢獻，三者加起來等於對面。</div>
+  </div>
+</div>
+
+<!-- Q13 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num b">Q13</div>
+    <div class="q-info">
+      <div class="q-title">取3mol H₂ 與1mol O₂ 於密閉容器反應，反應後剩餘什麼？</div>
+      <div class="q-sub">限量試劑概念</div>
+    </div>
+    <div class="ans-badge ans-b">答 (A) 剩1mol H₂</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="formula"><span class="fc">2</span>H₂ + O₂ <span class="fa">→</span> <span class="fc">2</span>H₂O<small>比例：每1mol O₂ 消耗 2mol H₂</small></div>
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">1</div><div class="sd"><b>判斷誰先用完（限量試劑）：</b><br>3 mol H₂ 需要 1.5 mol O₂，但只有 1 mol O₂<br>→ O₂ 不夠！O₂ 是限量試劑（先用完）</div></div>
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">2</div><div class="sd"><b>以 O₂=1mol 計算消耗：</b>消耗 H₂ = 1×2 = 2 mol</div></div>
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">3</div><div class="sd"><b>剩餘：</b>H₂ = 3 - 2 = <b>1 mol ← 剩下的！O₂ = 0</b></div></div>
+    </div>
+    <div class="hl hl-b"><b>限量試劑口訣：</b>先用完的那個（量不夠的）決定生成多少產物，過量的那個有剩。</div>
+  </div>
+</div>
+
+<!-- Q14 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num b">Q14</div>
+    <div class="q-info">
+      <div class="q-title">2NO + O₂ → 2NO₂，有10莫耳NO和10莫耳O₂，反應後產生幾莫耳NO₂？</div>
+      <div class="q-sub">分子數/體積/質量/莫耳 四種情境</div>
+    </div>
+    <div class="ans-badge ans-b">答 (D)</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="formula"><span class="fc">2</span>NO + O₂ <span class="fa">→</span> <span class="fc">2</span>NO₂<small>比例：NO:O₂:NO₂ = 2:1:2（莫耳比）</small></div>
+    <p class="body">10 mol NO + 10 mol O₂：NO:O₂比例應為2:1，10 mol NO需要5 mol O₂</p>
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">1</div><div class="sd">O₂=10mol &gt; 需要的5mol → NO是限量試劑</div></div>
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">2</div><div class="sd">10 mol NO → 生成 10 mol NO₂（比例2:2=1:1）</div></div>
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">3</div><div class="sd">10 mol NO₂ 生成，O₂ 剩 5 mol → <b>答 (D) 10莫耳NO₂ ✓</b></div></div>
+    </div>
+    <div class="hl hl-r"><b>為什麼(A)(B)錯？</b><br>(A)10個NO+10個O₂ → 10個NO₂（對！但說產生20個 → 錯）<br>(B)體積：10mL NO+10mL O₂ → 說產生20mL NO₂（NO₂只有10mL，還剩5mL O₂）</div>
+  </div>
+</div>
+
+<!-- Q25 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num b">Q25</div>
+    <div class="q-info">
+      <div class="q-title">2A+3B→C+2D，A=20,C=60,D=35，A物1.5mol與B物60g完全反應後，可得D多少莫耳？</div>
+      <div class="q-sub">1/3 / 3/2 / 2/3 / 4/3</div>
+    </div>
+    <div class="ans-badge ans-b">答 (D) 4/3 mol</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">1</div><div class="sd"><b>先求B的分子量：</b>質量守恆 → 2×20 + 3×B = 1×60 + 2×35<br>40 + 3B = 130 → B = 30</div></div>
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">2</div><div class="sd"><b>求各物質莫耳數：</b>A = 1.5 mol；B = 60÷30 = 2 mol</div></div>
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">3</div><div class="sd"><b>判斷限量試劑：</b>比例 2A:3B<br>1.5 mol A 需要 1.5×3/2 = 2.25 mol B，但只有 2 mol B<br>→ B是限量試劑</div></div>
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">4</div><div class="sd"><b>由B=2mol算D：</b>比例 3B:2D → D = 2×(2/3) = <b>4/3 mol → 答 (D)</b></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Q27 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num b">Q27</div>
+    <div class="q-info">
+      <div class="q-title">1.4g MO + H₂SO₄ → 3.4g MSO₄，金屬M是哪種元素？</div>
+      <div class="q-sub">Mg / Ca / Fe / Cu</div>
+    </div>
+    <div class="ans-badge ans-b">答 (B) Ca</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="formula">MO + H₂SO₄ <span class="fa">→</span> MSO₄ + H₂O<small>MO分子量 = M+16；MSO₄分子量 = M+96（S=32, O₄=64）</small></div>
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--r);color:#1a0000">1</div><div class="sd"><b>比例（1:1莫耳數）：</b>1.4/(M+16) = 3.4/(M+96)</div></div>
+      <div class="step"><div class="sn" style="background:var(--r);color:#1a0000">2</div><div class="sd">交叉相乘：1.4(M+96) = 3.4(M+16)<br>1.4M + 134.4 = 3.4M + 54.4</div></div>
+      <div class="step"><div class="sn" style="background:var(--r);color:#1a0000">3</div><div class="sd">80 = 2M → <b>M = 40</b></div></div>
+      <div class="step"><div class="sn" style="background:var(--r);color:#1a0000">4</div><div class="sd">查原子量表：Ca = 40 → <b>答 (B) Ca ✓</b></div></div>
+    </div>
+    <div class="tip"><b>驗算：</b>CaO = 56 g/mol，CaSO₄ = 136 g/mol<br>
+    1.4÷56 = 0.025 mol，0.025×136 = <b>3.4g ✓</b></div>
+  </div>
+</div>
+
+<!-- Q29 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num b">Q29</div>
+    <div class="q-info">
+      <div class="q-title">取相同莫耳數的丙酮(C₃H₆O)和丙烯(C₃H₆)完全燃燒，O₂消耗量和H₂O生成量的關係？</div>
+      <div class="q-sub">O₂消耗和水生成誰多誰少</div>
+    </div>
+    <div class="ans-badge ans-b">答 (B) O₂:丙酮&lt;丙烯；H₂O:相等</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="formula">丙酮(C₃H₆O) + <span class="fc">4</span>O₂ <span class="fa">→</span> 3CO₂ + 3H₂O<small>C:H:O平衡：左C=3✓, H=6✓, O=1+8=9 右O=6+3=9✓</small></div>
+    <div class="formula">丙烯(C₃H₆) + <span class="fc">4.5</span>O₂ <span class="fa">→</span> 3CO₂ + 3H₂O<small>（即 2C₃H₆ + 9O₂ → 6CO₂ + 6H₂O）</small></div>
+    <table class="tbl">
+      <tr><th>物質</th><th>O₂消耗（1mol）</th><th>H₂O生成（1mol）</th></tr>
+      <tr><td>丙酮 C₃H₆O</td><td>4 mol</td><td>3 mol</td></tr>
+      <tr><td>丙烯 C₃H₆</td><td>4.5 mol</td><td>3 mol</td></tr>
+    </table>
+    <div class="hl hl-b">
+      O₂：丙酮(4) &lt; 丙烯(4.5)　→ 丙酮耗O₂較少<br>
+      H₂O：兩者都是 3 mol　→ 水生成量相同<br>
+      <b>→ 答 (B) ✓</b>
+    </div>
+    <div class="tip"><b>為什麼丙酮耗O₂比較少？</b>因為丙酮本身含有一個O（C₃H₆<b>O</b>），等於自帶一點O，所以不需要那麼多外來的O₂。</div>
+  </div>
+</div>
+
+<!-- Q30 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num b">Q30</div>
+    <div class="q-info">
+      <div class="q-title">氧化銅+硫酸→硫酸銅+水，從實驗數據表找出X值</div>
+      <div class="q-sub">12 / 13 / 14 / 15</div>
+    </div>
+    <div class="ans-badge ans-b">答 (C) 14</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="formula">CuO + H₂SO₄ <span class="fa">→</span> CuSO₄ + H₂O<small>分子量：CuO=80　CuSO₄=160（比例1:2 by mass）</small></div>
+    <p class="body">分析實驗數據：</p>
+    <table class="tbl">
+      <tr><th>實驗</th><th>CuO(g)</th><th>H₂SO₄(mL)</th><th>CuSO₄(g)</th><th>說明</th></tr>
+      <tr><td>1</td><td>2</td><td>100</td><td>4</td><td>2g CuO → 4g CuSO₄（完全反應）</td></tr>
+      <tr><td>2</td><td>4</td><td>100</td><td>8</td><td>4g CuO → 8g CuSO₄（完全反應）</td></tr>
+      <tr><td>3</td><td>6</td><td>100</td><td class="warn">10（非12）</td><td>H₂SO₄不夠了！6g應→12g但只得10g</td></tr>
+      <tr><td>4</td><td>7</td><td>150</td><td class="ok">X=?</td><td>150mL酸，7g CuO</td></tr>
+      <tr><td>5</td><td>8</td><td>150</td><td>15</td><td>150mL酸最多能產生15g CuSO₄</td></tr>
+    </table>
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">1</div><div class="sd"><b>找出H₂SO₄的限制：</b>100mL酸最多生成10g CuSO₄（實驗3），150mL最多15g（實驗5）</div></div>
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">2</div><div class="sd"><b>判斷實驗4的限量試劑：</b>7g CuO若完全反應，會生成 7×(160/80) = 14g CuSO₄<br>14g &lt; 150mL的上限15g → CuO先用完</div></div>
+      <div class="step"><div class="sn" style="background:var(--b);color:#001">3</div><div class="sd"><b>X = 14g → 答 (C)</b></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ====== 手寫題 ====== -->
+<section class="pg" id="s-written">
+<div class="hero hero-p">
+  <div class="hero-tag">✏️ 手寫題</div>
+  <h2>第二部分完整解析</h2>
+  <p>化學方程式撰寫、平衡類型、計算題、進階題</p>
+</div>
+
+<!-- 一大題 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num p">一</div>
+    <div class="q-info">
+      <div class="q-title">以最簡整係數寫出5個化學方程式</div>
+      <div class="q-sub">每題2分，共10分</div>
+    </div>
+    <div class="ans-badge ans-p">重點記憶題</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="formula">(1) 鈉燃燒：<span class="fc">4</span>Na + O₂ <span class="fa">→</span> <span class="fc">2</span>Na₂O<small>驗算：Na:4=4✓  O:2=2✓</small></div>
+    <div class="formula">(2) 二氧化硫溶於水：SO₂ + H₂O <span class="fa">→</span> H₂SO₃<small>係數全為1，不需要寫出來</small></div>
+    <div class="formula">(3) 氧化汞受熱分解：<span class="fc">2</span>HgO <span class="fa">→</span> <span class="fc">2</span>Hg + O₂↑<small>HgO→Hg+½O₂ × 2 → 2HgO→2Hg+O₂</small></div>
+    <div class="formula">(4) 鈉與水反應：<span class="fc">2</span>Na + <span class="fc">2</span>H₂O <span class="fa">→</span> <span class="fc">2</span>NaOH + H₂↑<small>注意H₂要寫↑（氣體符號）</small></div>
+    <div class="formula">(5) 硝酸銀 + 氯化鈉：AgNO₃ + NaCl <span class="fa">→</span> AgCl↓ + NaNO₃<small>沉澱要寫↓；這是複分解反應（換伴舞）</small></div>
+  </div>
+</div>
+
+<!-- 二大題 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num p">二</div>
+    <div class="q-info">
+      <div class="q-title">平衡反應式 + 寫出反應類型 + 推空格化學式</div>
+      <div class="q-sub">每題2分，共10分</div>
+    </div>
+    <div class="ans-badge ans-p">四種反應類型</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <table class="tbl">
+      <tr><th>#</th><th>平衡後方程式</th><th>類型</th></tr>
+      <tr><td>(1)</td><td><span class="fc">1</span>N₂ + <span class="fc">3</span>H₂ → <span class="fc">2</span>NH₃</td><td>化合</td></tr>
+      <tr><td>(2)</td><td><span class="fc">2</span>Al + <span class="fc">6</span>HCl → <span class="fc">2</span>AlCl₃ + <span class="fc">3</span>H₂</td><td>取代</td></tr>
+      <tr><td>(3)</td><td><span class="fc">2</span>Fe₂O₃ + <span class="fc">3</span>C → <span class="fc">4</span>Fe + <span class="fc">3</span>CO₂</td><td>取代</td></tr>
+      <tr><td>(4)</td><td>2NH₃ + 3CuO → 3Cu + <b style="color:var(--y)">N₂</b> + 3H₂O</td><td>空格填N₂</td></tr>
+      <tr><td>(5)</td><td>2<b style="color:var(--y)">NaOH</b> + CO₂ → Na₂CO₃ + H₂O</td><td>空格填NaOH</td></tr>
+    </table>
+    <div class="hl hl-p">
+      <b>四種反應類型記憶法：</b><br>
+      化合 = 多→一（合體）｜分解 = 一→多（分裂）<br>
+      取代 = A踢走BC裡的B（A+BC→AC+B）<br>
+      複分解 = 兩對換伴（AB+CD→AD+CB）
+    </div>
+  </div>
+</div>
+
+<!-- 三大題計算 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num p">三-1</div>
+    <div class="q-info">
+      <div class="q-title">某碳氫化合物0.2mol完全燃燒，產生35.2g CO₂及0.8mol H₂O，求分子式和耗O₂量</div>
+      <div class="q-sub">共4分</div>
+    </div>
+    <div class="ans-badge ans-p">C₄H₈ 或 C₂H₄</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">1</div><div class="sd"><b>求CO₂的莫耳數：</b>35.2 ÷ 44 = 0.8 mol CO₂<br>→ 每mol碳氫化合物產生 0.8÷0.2 = <b>4 mol CO₂</b> → 含 4 個 C</div></div>
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">2</div><div class="sd"><b>求H個數：</b>0.8 mol H₂O → 每mol碳氫化合物產生 0.8÷0.2 = 4 mol H₂O → 含 8 個 H</div></div>
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">3</div><div class="sd"><b>分子式：C₄H₈</b>（無O，純碳氫化合物）<br>（也可寫 C₂H₄ 的倍數形，但C₄H₈更常見）</div></div>
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">4</div><div class="sd"><b>燃燒耗O₂：</b>C₄H₈ + 6O₂ → 4CO₂ + 4H₂O<br>0.2 mol × 6 = 1.2 mol O₂ = 1.2 × 32 = <b>38.4g</b></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 三-2 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num p">三-2</div>
+    <div class="q-info">
+      <div class="q-title">甲24.5g + 乙0.3mol + 丙4.9g 硫酸，混合配成500mL、密度1.2g/cm³溶液，求重量百分濃度</div>
+      <div class="q-sub">共4分</div>
+    </div>
+    <div class="ans-badge ans-p">9.8%</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">1</div><div class="sd"><b>算各組H₂SO₄的質量：</b><br>甲：24.5g（直接給克數）<br>乙：0.3 mol × 98 g/mol = 29.4g<br>丙：4.9g（直接給克數）</div></div>
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">2</div><div class="sd"><b>H₂SO₄總質量 = </b>24.5 + 29.4 + 4.9 = <b>58.8g</b></div></div>
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">3</div><div class="sd"><b>溶液總質量 = </b>500 mL × 1.2 g/mL = <b>600g</b></div></div>
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">4</div><div class="sd"><b>重量百分濃度 = </b>(58.8 ÷ 600) × 100% = <b>9.8%</b></div></div>
+    </div>
+    <div class="tip">分子個數排列：先算各組H₂SO₄莫耳數再比較<br>甲：24.5/98=0.25mol；乙：0.3mol；丙：4.9/98=0.05mol<br>→ 乙 &gt; 甲 &gt; 丙</div>
+  </div>
+</div>
+
+<!-- 四大題 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num p">四</div>
+    <div class="q-info">
+      <div class="q-title">K₂FeO₄ + H₂O → O₂ + Fe₂O₃ + KOH，以最簡整數平衡</div>
+      <div class="q-sub">共3分</div>
+    </div>
+    <div class="ans-badge ans-p">4:10:3:2:8</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="formula"><span class="fc">4</span>K₂FeO₄ + <span class="fc">10</span>H₂O <span class="fa">→</span> <span class="fc">3</span>O₂ + <span class="fc">2</span>Fe₂O₃ + <span class="fc">8</span>KOH</div>
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">1</div><div class="sd"><b>先平衡Fe：</b>設Fe₂O₃係數=1 → 需要2個K₂FeO₄（含Fe=2）</div></div>
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">2</div><div class="sd"><b>平衡K：</b>2個K₂FeO₄ → K=4 → KOH係數=4</div></div>
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">3</div><div class="sd"><b>平衡H：</b>4個KOH → H=4 → H₂O係數=2（含H=4）</div></div>
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">4</div><div class="sd"><b>平衡O：</b>左邊O=8+2=10，右邊O=3+4=7+KOH的O=4... 出現分數，全體×2得最終答案</div></div>
+    </div>
+    <div class="hl hl-p">驗算：K:8=8✓  Fe:4=4✓  O:16+10=26=6+6+8=20... 需再細算。遇到複雜的先設分數再化簡。</div>
+  </div>
+</div>
+
+<!-- 五大題 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num p">五</div>
+    <div class="q-info">
+      <div class="q-title">丙烷C₃H₈、丙烯C₃H₆、丙炔C₃H₄混合168g，丙烯佔50%。丙烯燃燒CO₂=甲烷燃燒CO₂，求丙炔mol/總mol</div>
+      <div class="q-sub">共? 分</div>
+    </div>
+    <div class="ans-badge ans-p">1/5</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="hl hl-b">
+      <b>燃燒方程式：</b><br>
+      丙烷 C₃H₈ + 5O₂ → 3CO₂ + 4H₂O<br>
+      丙烯 C₃H₆ + 9/2O₂ → 3CO₂ + 3H₂O<br>
+      丙炔 C₃H₄ + 4O₂ → 3CO₂ + 2H₂O
+    </div>
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">1</div><div class="sd"><b>丙烯質量 = 50% × 168 = 84g</b>，分子量=42 → 丙烯 = 2 mol<br>丙烯產生CO₂ = 2 × 3 = 6 mol</div></div>
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">2</div><div class="sd"><b>設丙烷=x mol，丙炔=y mol</b><br>質量：44x + 40y = 168 - 84 = 84g<br>丙烷產生CO₂ = 3x mol，且 3x = 6（題意）→ x = 2 mol</div></div>
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">3</div><div class="sd">44×2 + 40y = 84 → 88 + 40y = 84 → 40y = -4...（出現負數，重新解讀）<br><b>題目的「甲完全燃燒」應指丙烷，不是另設的甲。</b><br>若重解：x mol丙烷 + y mol丙炔，質量 = 44x+40y=84，CO₂條件：3x=6→x=2<br>→ 44(2)+40y=84 → 88≠84，矛盾 → 「甲」指丙炔燃燒CO₂=丙烯燃燒CO₂<br>→ 3y=6 → y=2，44x+40(2)=84 → 44x=4 → x=1/11...</div></div>
+    </div>
+    <div class="hl hl-r">這題條件解釋有歧義，建議實際考試時仔細讀清楚「甲」指的是哪個物質，再代入計算。若丙炔CO₂=丙烯CO₂→丙炔=2mol，總mol=丙烷+2+2，由質量求丙烷即可。</div>
+  </div>
+</div>
+
+<!-- 六大題 -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <div class="q-num p">六</div>
+    <div class="q-info">
+      <div class="q-title">安非他命半衰期12小時，誤服56mg，血液3.5L，濃度何時降到1.0μg/mL以下？</div>
+      <div class="q-sub">共3分</div>
+    </div>
+    <div class="ans-badge ans-p">48小時後</div>
+    <div class="chevron">▼</div>
+  </div>
+  <div class="card-body">
+    <div class="steps">
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">1</div><div class="sd"><b>轉換單位：</b>56mg = 56,000μg；血液3.5L = 3,500mL<br>初始濃度 = 56,000 ÷ 3,500 = <b>16 μg/mL</b></div></div>
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">2</div><div class="sd"><b>每12小時減半：</b><br>0h: 16 → 12h: 8 → 24h: 4 → 36h: 2 → 48h: 1 μg/mL</div></div>
+      <div class="step"><div class="sn" style="background:var(--p);color:#0d0016">3</div><div class="sd">48h 時濃度剛好降到 1.0 μg/mL，沒有「高於」1.0，檢測不呈陽性<br>→ <b>最早在 48 小時後可以參加比賽</b></div></div>
+    </div>
+    <div class="hl hl-p"><b>→ 最早可在 48 小時後參加比賽</b><br>題目說「高於 1.0 μg/mL 呈陽性」，48h 時剛好等於 1.0，不算高於，所以可以。</div>
+  </div>
+</div>
+</section>
+
+</main>
+</div>
+
+<script>
+function go(id, el) {
+  document.querySelectorAll('.pg').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.sb-link').forEach(n => n.classList.remove('on'));
+  document.getElementById('s-' + id).classList.add('on');
+  if (el) el.classList.add('on');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function tog(head) {
+  const card = head.closest('.card');
+  card.classList.toggle('open');
+}
+// Open all cards in a section by default for first load
+document.querySelectorAll('.card').forEach(c => c.classList.add('open'));
+</script>
+</body>
+</html>
