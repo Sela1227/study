@@ -114,48 +114,44 @@ p.body:last-child{margin-bottom:0;}
 /* scrollbar */
 ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:3px;}
 
-/* ── mobile responsive & back nav ── */
-.back-nav {
-  position:fixed; top:0; left:200px; right:0; z-index:200;
-  background:rgba(19,19,31,.97); backdrop-filter:blur(10px);
+/* ── Mobile responsive ── */
+.back-nav{
+  position:fixed;top:0;left:200px;right:0;z-index:200;
+  background:rgba(19,19,31,.96);backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
   border-bottom:1px solid rgba(255,255,255,.08);
-  padding:10px 20px; display:flex; align-items:center; gap:8px;
-  height:44px;
+  padding:0 20px;height:52px;
+  display:flex;align-items:center;gap:8px;
+  font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
 }
-.back-nav a { display:flex; align-items:center; gap:4px; font-size:13px; color:#8888aa; text-decoration:none; }
-.back-nav a:hover { color:#e2e2f0; }
-.back-nav .sep { color:rgba(255,255,255,.2); font-size:13px; }
-.back-nav .current { font-size:13px; color:#e2e2f0; font-weight:500; }
-.content { padding-top:60px !important; }
-
-@media (max-width:680px) {
-  .sidebar {
-    position:fixed; bottom:0; left:0; right:0; top:auto;
-    width:100%; height:auto; min-width:0;
-    flex-direction:row; display:flex;
-    overflow-x:auto; overflow-y:hidden;
-    border-right:none; border-top:1px solid rgba(255,255,255,.1);
-    padding:0; z-index:150;
+.back-nav a{display:flex;align-items:center;gap:4px;font-size:13px;color:#8888aa;text-decoration:none;min-height:44px;}
+.back-nav a:hover{color:#e2e2f0;}
+.back-nav .bn-sep{color:rgba(255,255,255,.18);font-size:14px;}
+.back-nav .bn-cur{font-size:13px;font-weight:500;color:#e2e2f0;}
+.content{padding-top:68px !important;}
+@media(max-width:680px){
+  .sidebar{
+    position:fixed;bottom:0;left:0;right:0;top:auto;
+    width:100%;height:auto;min-width:0;
+    flex-direction:row;display:flex;
+    overflow-x:auto;overflow-y:hidden;
+    border-right:none;border-top:1px solid rgba(255,255,255,.1);
+    padding:0;z-index:150;
     -webkit-overflow-scrolling:touch;
   }
-  .sidebar::-webkit-scrollbar { display:none; }
-  .sb-logo, .sb-group { display:none; }
-  .sb-link {
-    flex-shrink:0; padding:10px 14px;
-    white-space:nowrap; border-left:none;
+  .sidebar::-webkit-scrollbar{display:none;}
+  .sb-logo,.sb-group{display:none;}
+  .sb-link{
+    flex-shrink:0;padding:10px 14px;
+    white-space:nowrap;border-left:none;
     border-bottom:3px solid transparent;
-    font-size:12px; min-height:48px;
-    display:flex; align-items:center;
+    font-size:12px;min-height:48px;
+    display:flex;align-items:center;
   }
-  .sb-link.on { border-left:none; border-bottom-color:var(--y); background:rgba(245,197,24,.05); }
-  .sb-count { display:none; }
-  .content { margin-left:0; padding:16px 14px 80px 14px !important; }
-  .back-nav { left:0; height:48px; padding:0 14px; }
-  .content { padding-top:64px !important; }
-  .hero { padding:20px 18px; }
-  .hero h2 { font-size:20px; }
-  .concept-grid { grid-template-columns:1fr; }
+  .sb-link.on{border-left:none;border-bottom-color:var(--y);background:rgba(245,197,24,.05);}
+  .sb-count{display:none;}
+  .content{margin-left:0;padding:72px 14px 80px 14px !important;}
+  .back-nav{left:0;padding:0 14px;}
 }
 </style>
 </head>
@@ -163,11 +159,13 @@ p.body:last-child{margin-bottom:0;}
 
 <div class="back-nav">
   <a href="index.html">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+      <path d="M15 18l-6-6 6-6"/>
+    </svg>
     化學
   </a>
-  <span class="sep">/</span>
-  <span class="current">第一次段考詳解</span>
+  <span class="bn-sep">/</span>
+  <span class="bn-cur">第一次段考詳解</span>
 </div>
 
 <div class="wrap">

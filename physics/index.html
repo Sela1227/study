@@ -3,73 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#f5f4f0">
+<meta name="theme-color" content="#F4F2ED">
 <title>物理 — 國中複習</title>
 <link rel="stylesheet" href="../css/main.css">
-<style>
-  :root { --accent: #7C3AED; --accent-bg: #F5F3FF; --accent-dark: #6D28D9; }
-  .chapter-num {
-    font-size: 14px; font-weight: 600; color: var(--accent-dark);
-    background: var(--accent-bg); width: 40px; height: 40px;
-    border-radius: 10px; display: flex; align-items: center; justify-content: center;
-  }
-</style>
 </head>
 <body>
 <div class="page">
 
-  <div class="topnav">
-    <button class="back-btn" onclick="history.back()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="18" height="18">
+  <div class="topbar">
+    <a href="../" class="topbar-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M15 18l-6-6 6-6"/>
       </svg>
       首頁
-    </button>
+    </a>
+    <span class="topbar-sep">/</span>
+    <span class="topbar-title">物理</span>
   </div>
 
   <div class="page-header">
-    <div class="subject-tag" style="color:var(--accent);">科目</div>
+    <div class="ph-tag" style="color:var(--phys);">Physics</div>
     <h1>物理</h1>
-    <div class="subtitle">力學・光學・電學・熱學</div>
+    <p class="ph-sub">力學 · 光學 · 電學 · 熱學</p>
   </div>
 
-  <div class="stats-row">
-    <div class="stat-box">
-      <div class="stat-num" style="color:var(--accent);">0</div>
-      <div class="stat-label">章節完成</div>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-n" style="color:var(--text-3);">0</div>
+      <div class="stat-l">章節完成</div>
     </div>
-    <div class="stat-box">
-      <div class="stat-num" style="color:#D97706;">0</div>
-      <div class="stat-label">段考解析</div>
+    <div class="stat">
+      <div class="stat-n" style="color:var(--text-3);">0</div>
+      <div class="stat-l">段考解析</div>
     </div>
-    <div class="stat-box">
-      <div class="stat-num" style="color:#888780;">—</div>
-      <div class="stat-label">章節待讀</div>
-    </div>
-  </div>
-  <div class="progress-bar">
-    <div class="progress-fill" style="background:var(--accent);width:0%"></div>
-  </div>
-
-  <div class="section-head">章節教材</div>
-  <div class="card-list">
-    <div class="item-card disabled" style="justify-content:center;padding:32px 16px;flex-direction:column;gap:8px;text-align:center;">
-      <div style="font-size:32px;">⚡</div>
-      <div style="font-size:14px;font-weight:500;color:#5f5e5a;">物理章節尚未新增</div>
-      <div style="font-size:13px;color:#888780;">教材準備好後會出現在這裡</div>
+    <div class="stat">
+      <div class="stat-n" style="color:var(--text-3);">—</div>
+      <div class="stat-l">章節待讀</div>
     </div>
   </div>
 
-  <div class="section-head">段考解析</div>
-  <div class="card-list">
-    <div class="item-card disabled" style="justify-content:center;padding:32px 16px;flex-direction:column;gap:8px;text-align:center;">
-      <div style="font-size:32px;">📝</div>
-      <div style="font-size:14px;font-weight:500;color:#5f5e5a;">段考解析尚未新增</div>
-      <div style="font-size:13px;color:#888780;">教材準備好後會出現在這裡</div>
+  <div class="section-head">
+    <span class="section-head-label">章節教材</span>
+    <div class="section-head-line"></div>
+  </div>
+
+  <div class="card-stack-wrap">
+    <div class="item" style="justify-content:center;padding:36px 16px;flex-direction:column;gap:10px;text-align:center;">
+      <div style="font-size:12px;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase;">尚未開始</div>
+      <div style="font-size:13px;color:var(--text-2);">教材準備好後會出現在這裡</div>
     </div>
   </div>
 
-  <div class="page-footer">物理 · 國中複習</div>
+  <div class="section-head">
+    <span class="section-head-label">段考解析</span>
+    <div class="section-head-line"></div>
+  </div>
+
+  <div class="card-stack-wrap">
+    <div class="item" style="justify-content:center;padding:36px 16px;flex-direction:column;gap:10px;text-align:center;">
+      <div style="font-size:12px;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase;">尚未開始</div>
+      <div style="font-size:13px;color:var(--text-2);">教材準備好後會出現在這裡</div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="footer-left">物理 · 國中複習</span>
+    <span class="footer-right">V1.1</span>
+  </div>
+
 </div>
 </body>
 </html>
