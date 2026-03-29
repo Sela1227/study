@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第五章：元素及化合物</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f8f7f3; color: #1a1a18; }
+
+/* ── HEADER ── */
+.hdr { background: #fff; border-bottom: 1px solid #e0dfd7; padding: .875rem 1rem .5rem; position: sticky; top: 0; z-index: 100; }
+.hdr-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.hdr-title { font-size: 15px; font-weight: 500; }
+.hdr-prog { font-size: 12px; color: #888780; }
+.prog-bar { height: 4px; background: #e8e7df; border-radius: 2px; }
+.prog-fill { height: 4px; background: #185FA5; border-radius: 2px; transition: width .4s; width: 0%; }
+
+/* ── LESSON NAV ── */
+.lnav { background: #fff; border-bottom: 1px solid #e0dfd7; padding: .5rem 1rem; display: flex; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.lnav::-webkit-scrollbar { display: none; }
+.lpill { flex-shrink: 0; padding: 5px 12px; border-radius: 999px; border: 1px solid #e0dfd7; background: #fff; color: #888780; font-size: 12px; cursor: pointer; transition: all .15s; white-space: nowrap; }
+.lpill.active { background: #185FA5; color: #fff; border-color: #185FA5; font-weight: 500; }
+.lpill.done { background: #EAF3DE; color: #3B6D11; border-color: #97C459; }
+
+/* ── LESSON CONTENT ── */
+.lesson { display: none; padding: 1.25rem 1rem 5.5rem; max-width: 700px; margin: 0 auto; }
+.lesson.active { display: block; }
+
+/* Hook */
+.hook { background: #fff; border: 1px solid #e0dfd7; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.25rem; }
+.hook-label { font-size: 11px; font-weight: 500; color: #534AB7; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
+.hook h2 { font-size: 19px; font-weight: 500; margin-bottom: .75rem; line-height: 1.4; }
+.hook p { font-size: 14px; line-height: 1.75; color: #3d3d3a; }
+
+/* Section */
+.sec { margin-bottom: 1.25rem; }
+.sec h3 { font-size: 15px; font-weight: 500; margin-bottom: .625rem; }
+.sec p { font-size: 14px; line-height: 1.75; color: #3d3d3a; margin-bottom: .625rem; }
+
+/* Cards */
+.card { background: #fff; border: 1px solid #e0dfd7; border-radius: 12px; padding: 1rem; margin-bottom: .75rem; }
+.card h4 { font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+.card p, .card li { font-size: 13px; line-height: 1.75; color: #5f5e5a; }
+.card ul { padding-left: 1.2rem; }
+.card li { margin-bottom: 3px; }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: .75rem; }
+@media (max-width: 440px) { .grid2 { grid-template-columns: 1fr; } }
+
+/* Concept box */
+.cbox { background: #E6F1FB; border-left: 4px solid #185FA5; border-radius: 0 10px 10px 0; padding: .875rem 1rem; margin-bottom: .75rem; font-size: 14px; line-height: 1.7; color: #0C447C; }
+.cbox strong { font-weight: 500; }
+
+/* Remember */
+.rbox { background: #FAEEDA; border: 1px solid #EF9F27; border-radius: 10px; padding: .875rem 1rem; margin-bottom: .75rem; font-size: 13px; color: #633806; line-height: 1.7; }
+.rbox .rtitle { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; color: #854F0B; }
+
+/* Wow box */
+.wow { background: #FAECE7; border: 1px solid #F0997B; border-radius: 10px; padding: .875rem 1rem; margin-bottom: .75rem; font-size: 13px; color: #712B13; line-height: 1.7; }
+.wow strong { font-weight: 500; }
+
+/* Table */
+.tbl { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: .75rem; }
+.tbl th { padding: 7px 10px; border-bottom: 1px solid #c8c7bf; color: #5f5e5a; font-weight: 500; background: #f5f4f0; text-align: center; }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 7px 10px; border-bottom: 1px solid #e8e7df; text-align: center; color: #3d3d3a; }
+.tbl td:first-child { text-align: left; color: #5f5e5a; }
+
+/* Summary */
+.summary { background: #EAF3DE; border: 1px solid #97C459; border-radius: 12px; padding: 1rem 1.25rem; margin-top: 1.5rem; }
+.summary h4 { font-size: 13px; font-weight: 500; color: #3B6D11; margin-bottom: 8px; }
+.summary li { font-size: 13px; color: #27500A; line-height: 1.75; list-style: none; padding-left: 1.2rem; position: relative; }
+.summary li::before { content: "✓"; position: absolute; left: 0; color: #3B6D11; }
+
+/* Divider */
+.sdiv { border: none; border-top: 1px solid #e8e7df; margin: 1.25rem 0; }
+
+/* Badge */
+.badge { display: inline-block; padding: 1px 9px; border-radius: 999px; font-size: 12px; font-weight: 500; }
+.bb { background: #E6F1FB; color: #185FA5; }
+.ba { background: #FAEEDA; color: #854F0B; }
+.bt { background: #E1F5EE; color: #0F6E56; }
+.bc { background: #FAECE7; color: #993C1D; }
+.bp { background: #EEEDFE; color: #534AB7; }
+
+/* ── ELEMENT GRID ── */
+.el-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(74px, 1fr)); gap: 6px; margin-bottom: .75rem; }
+.el-tile { background: #fff; border: 1px solid #e0dfd7; border-radius: 8px; padding: 6px 4px; text-align: center; cursor: pointer; transition: all .12s; }
+.el-tile:hover { transform: scale(1.06); box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+.el-tile.metal { border-left: 3px solid #EF9F27; }
+.el-tile.nonmetal { border-left: 3px solid #5DCAA5; }
+.el-tile.selected { background: #E6F1FB; border-color: #378ADD; }
+.et-sym { font-size: 16px; font-weight: 500; }
+.et-name { font-size: 10px; color: #888780; margin-top: 2px; }
+.et-state { font-size: 9px; color: #c8c7bf; }
+#el-detail { background: #fff; border: 1px solid #e0dfd7; border-radius: 10px; padding: .875rem; margin-bottom: .75rem; font-size: 13px; line-height: 1.75; min-height: 56px; }
+
+/* ── FLASHCARD ── */
+.fc-wrap { perspective: 800px; margin-bottom: .875rem; cursor: pointer; }
+.fc-inner { position: relative; height: 120px; transform-style: preserve-3d; transition: transform .45s; }
+.fc-inner.flipped { transform: rotateY(180deg); }
+.fc-face { position: absolute; inset: 0; background: #fff; border: 1px solid #e0dfd7; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; backface-visibility: hidden; gap: 5px; }
+.fc-back-face { transform: rotateY(180deg); background: #E6F1FB; }
+.fc-big { font-size: 30px; font-weight: 500; color: #185FA5; }
+.fc-hint { font-size: 12px; color: #888780; }
+.fc-back-face .fc-big { font-size: 22px; color: #0C447C; }
+.fc-controls { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 1rem; }
+.fc-btn { padding: 7px 18px; border-radius: 999px; border: 1px solid #c8c7bf; background: #fff; color: #5f5e5a; font-size: 13px; cursor: pointer; }
+.fc-ctr { font-size: 13px; color: #888780; }
+.fc-modes { display: flex; gap: 6px; flex-wrap: wrap; }
+.fc-mode { padding: 5px 12px; border-radius: 999px; border: 1px solid #e0dfd7; background: #fff; color: #5f5e5a; font-size: 12px; cursor: pointer; }
+.fc-mode.active { background: #E6F1FB; color: #185FA5; border-color: #85B7EB; }
+
+/* ── PERIODIC TABLE MAP ── */
+.pt-wrap { overflow-x: auto; margin-bottom: .875rem; }
+.pt-row { display: flex; gap: 2px; margin-bottom: 2px; min-width: 520px; }
+.ptc { width: 26px; height: 26px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 500; cursor: pointer; flex-shrink: 0; transition: transform .1s; border: .5px solid transparent; }
+.ptc:hover { transform: scale(1.25); z-index: 5; position: relative; }
+.ptc.empty { background: transparent; cursor: default; }
+.ptc.m { background: #FAEEDA; color: #633806; border-color: #EF9F27; }
+.ptc.nm { background: #E1F5EE; color: #085041; border-color: #5DCAA5; }
+.ptc.alk { background: #EF9F27; color: #fff; border-color: #BA7517; }
+.ptc.alt { background: #97C459; color: #fff; border-color: #639922; }
+.ptc.hal { background: #7F77DD; color: #fff; border-color: #534AB7; }
+.ptc.nob { background: #D85A30; color: #fff; border-color: #993C1D; }
+.ptc.tr { background: #F1EFE8; color: #5F5E5A; border-color: #c8c7bf; }
+.pt-legend { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: .875rem; }
+.pt-leg-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #5f5e5a; }
+.pt-leg-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+#group-info { background: #fff; border: 1px solid #e0dfd7; border-radius: 10px; padding: .875rem; font-size: 13px; line-height: 1.75; margin-bottom: .75rem; min-height: 56px; }
+
+/* ── ACTIVITY EXPERIMENT ── */
+.act-tabs { display: flex; gap: 6px; margin-bottom: .75rem; flex-wrap: wrap; }
+.act-tab { padding: 6px 14px; border-radius: 6px; border: 1px solid #e0dfd7; background: #fff; color: #5f5e5a; font-size: 13px; cursor: pointer; }
+.act-tab.active { background: #EAF3DE; color: #3B6D11; border-color: #97C459; }
+#act-display { background: #fff; border: 1px solid #e0dfd7; border-radius: 10px; padding: .875rem; font-size: 13px; line-height: 1.75; margin-bottom: .75rem; }
+
+/* ── ELEMENT DETAIL CARDS (Lesson 7) ── */
+.elem-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: .75rem; }
+.elem-tab { padding: 6px 14px; border-radius: 6px; border: 1px solid #e0dfd7; background: #fff; color: #5f5e5a; font-size: 13px; cursor: pointer; }
+.elem-tab.active { background: #E6F1FB; color: #185FA5; border-color: #85B7EB; }
+#elem-detail { font-size: 13px; line-height: 1.75; }
+
+/* ── RATIO CALC ── */
+.ratio-box { background: #f5f4f0; border-radius: 10px; padding: 1rem; margin-bottom: .75rem; }
+select, input[type=number] { padding: 7px 10px; border-radius: 8px; border: 1px solid #c8c7bf; background: #fff; font-size: 13px; }
+input[type=number] { width: 110px; }
+
+/* ── QUIZ ── */
+.qcard { background: #fff; border: 1px solid #e0dfd7; border-radius: 12px; padding: 1rem; margin-bottom: .875rem; }
+.qcard .qtxt { font-size: 13px; font-weight: 500; line-height: 1.6; margin-bottom: 10px; }
+.qopt { padding: 7px 12px; border-radius: 8px; border: 1px solid #e0dfd7; background: #fff; margin-bottom: 5px; font-size: 13px; cursor: pointer; display: flex; gap: 8px; transition: all .12s; }
+.qopt:hover { border-color: #85B7EB; background: #f0f7fd; }
+.qopt.sel { background: #E6F1FB; border-color: #378ADD; }
+.qopt.ok { background: #EAF3DE; border-color: #97C459; color: #3B6D11; }
+.qopt.no { background: #FAECE7; border-color: #F0997B; color: #993C1D; }
+.qlabel { font-weight: 500; color: #c8c7bf; min-width: 20px; }
+.qexp { display: none; margin-top: 8px; padding: .625rem .875rem; border-radius: 8px; font-size: 12px; line-height: 1.65; }
+
+/* ── BOTTOM NAV ── */
+.bnav { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid #e0dfd7; padding: .75rem 1rem; display: flex; gap: 10px; z-index: 99; }
+.bnav-btn { flex: 1; padding: 11px; border-radius: 10px; border: 1px solid #c8c7bf; background: #fff; color: #5f5e5a; font-size: 14px; font-weight: 500; cursor: pointer; }
+.bnav-btn.primary { background: #185FA5; color: #fff; border-color: #185FA5; }
+.bnav-btn:disabled { opacity: .35; cursor: not-allowed; }
+</style>
+</head>
+<body>
+<div style="position:sticky;top:0;z-index:200;background:rgba(245,244,240,.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:10px 16px;border-bottom:1px solid #e0dfd7;display:flex;align-items:center;gap:8px;"><a href="index.html" style="display:flex;align-items:center;gap:4px;font-size:14px;color:#5f5e5a;text-decoration:none;min-height:44px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>化學</a><span style="color:#c8c7bf;font-size:13px;">/</span><span style="font-size:14px;color:#1a1a18;">第五章</span></div>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="hdr-title">第五章：元素及化合物</div>
+    <div class="hdr-prog" id="hdr-prog">第 1 課，共 10 課</div>
+  </div>
+  <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+</div>
+
+<!-- LESSON NAV -->
+<div class="lnav" id="lnav">
+  <div class="lpill active" onclick="goLesson(0)">①萬物分類</div>
+  <div class="lpill" onclick="goLesson(1)">②元素</div>
+  <div class="lpill" onclick="goLesson(2)">③原子構造</div>
+  <div class="lpill" onclick="goLesson(3)">④元素命名</div>
+  <div class="lpill" onclick="goLesson(4)">⑤化合物</div>
+  <div class="lpill" onclick="goLesson(5)">⑥化學鍵結</div>
+  <div class="lpill" onclick="goLesson(6)">⑦金屬vs非金屬</div>
+  <div class="lpill" onclick="goLesson(7)">⑧週期表</div>
+  <div class="lpill" onclick="goLesson(8)">⑨重要元素</div>
+  <div class="lpill" onclick="goLesson(9)">⑩挑戰測驗</div>
+</div>
+
+<!-- ================= LESSON 0 ================= -->
+<div class="lesson active" id="L0">
+  <div class="hook">
+    <div class="hook-label">課前提問</div>
+    <h2>你喝的水、你的頭髮、連你的身體——它們到底是什麼做的？</h2>
+    <p>科學家花了幾百年試著回答這個問題。結論非常驚人：世界上所有的東西，都是由不到 120 種「基本積木塊」拼出來的。這節課，我們先搞清楚物質的三種身份。</p>
+  </div>
+
+  <div class="sec">
+    <h3>第一步：純？還是混？</h3>
+    <p>你喝的柳橙汁，可能是「純柳橙汁」，也可能是「柳橙汁加水加糖」調出來的。化學也把物質分成這兩種。</p>
+
+    <div class="grid2">
+      <div class="card" style="border-top:3px solid #185FA5;">
+        <h4>純物質</h4>
+        <p>整瓶東西從頭到尾都是<strong>同一種</strong>物質，成分固定，有固定的熔點和沸點。<br><br>例：純水（H₂O）、純金（Au）、食鹽（NaCl）</p>
+      </div>
+      <div class="card" style="border-top:3px solid #854F0B;">
+        <h4>混合物</h4>
+        <p>由<strong>兩種以上</strong>純物質混在一起，比例可以隨意調整，可以用物理方法分開。<br><br>例：空氣、食鹽水、合金（K金）</p>
+      </div>
+    </div>
+
+    <div class="rbox">
+      <div class="rtitle">判斷技巧</div>
+      有固定熔點 → 純物質（非混合物）<br>
+      可以分解出更簡單的東西 → 化合物（非元素）<br>
+      完全不能分解 → 元素
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>第二步：純物質裡面，又分兩種</h3>
+    <p>純物質還可以再分：</p>
+
+    <div class="grid2">
+      <div class="card" style="border-top:3px solid #5DCAA5;">
+        <h4>元素</h4>
+        <p>只由<strong>一種</strong>原子組成，用一般化學方法無法再分解。<br><br>例：氧氣 O₂、鐵 Fe、氦氣 He、金 Au</p>
+      </div>
+      <div class="card" style="border-top:3px solid #993C1D;">
+        <h4>化合物</h4>
+        <p>由<strong>兩種以上</strong>不同元素的原子，按固定比例化學結合。<br><br>例：水 H₂O、食鹽 NaCl、二氧化碳 CO₂</p>
+      </div>
+    </div>
+
+    <div class="wow">
+      <strong>最大的驚喜：</strong>化合物的性質和組成它的元素<strong>完全不同</strong>！<br>
+      氫氣（H₂）會爆炸 ＋ 氧氣（O₂）助燃 → 結合成水（H₂O）卻用來滅火！
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>完整分類圖</h3>
+    <div class="card" style="font-size:13px;line-height:2;">
+      <strong>物質</strong><br>
+      ├── <span style="color:#185FA5;font-weight:500;">純物質</span><br>
+      │　　├── <span style="color:#0F6E56;font-weight:500;">元素</span>：N₂、H₂、He、O₂、Au、Fe…<br>
+      │　　└── <span style="color:#993C1D;font-weight:500;">化合物</span>：H₂O、NaCl、CO₂、H₂SO₄…<br>
+      └── <span style="color:#854F0B;font-weight:500;">混合物</span><br>
+      　　　├── 均勻混合（溶液）：合金、糖水、空氣<br>
+      　　　└── 不均勻混合：泥水、沙拉
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>練習：下面這些是什麼？</h3>
+    <table class="tbl">
+      <thead><tr><th>物質</th><th>答案</th><th>為什麼</th></tr></thead>
+      <tbody>
+        <tr><td>氧氣 O₂</td><td><span class="badge bt">元素</span></td><td>只含氧原子，不能再分解</td></tr>
+        <tr><td>水 H₂O</td><td><span class="badge bc">化合物</span></td><td>H＋O按1:8質量比化合</td></tr>
+        <tr><td>空氣</td><td><span class="badge ba">混合物</span></td><td>N₂、O₂等多種氣體混合</td></tr>
+        <tr><td>K金（18K）</td><td><span class="badge ba">混合物</span></td><td>金＋銅物理混合，比例可調</td></tr>
+        <tr><td>食鹽 NaCl</td><td><span class="badge bc">化合物</span></td><td>Na＋Cl按固定比例化學鍵結</td></tr>
+        <tr><td>鑽石</td><td><span class="badge bt">元素</span></td><td>只含碳原子（C），無法再分解</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="summary">
+    <h4>這課學到了</h4>
+    <ul>
+      <li>物質分純物質（成分固定）和混合物（比例任意）</li>
+      <li>純物質又分元素（只有一種原子）和化合物（兩種以上原子化學鍵結）</li>
+      <li>化合物的性質和組成它的元素完全不同</li>
+      <li>有固定熔點 → 純物質；能分解 → 化合物</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= LESSON 1 ================= -->
+<div class="lesson" id="L1">
+  <div class="hook">
+    <div class="hook-label">課前提問</div>
+    <h2>為什麼宇宙只有 118 種積木，卻能拼出幾百萬種不同的東西？</h2>
+    <p>元素就是最小的積木塊，再怎麼用化學方法打碎，都沒辦法變成別的東西。目前科學家發現了 118 種，88種天然、其餘是人造的。點下面每一塊磚，認識它們。</p>
+  </div>
+
+  <div class="sec">
+    <h3>元素的第一種分類：金屬 vs 非金屬</h3>
+    <div class="grid2">
+      <div class="card" style="border-top:3px solid #EF9F27;">
+        <h4>金屬元素（94種）</h4>
+        <p>銀灰色光澤、能導電傳熱、有延展性（可打薄拉長）、常溫大多是固體</p>
+      </div>
+      <div class="card" style="border-top:3px solid #5DCAA5;">
+        <h4>非金屬元素（24種）</h4>
+        <p>顏色各異、大多不導電、易碎沒有延展性、常溫有固、液、氣三種狀態</p>
+      </div>
+    </div>
+    <div class="rbox">
+      <div class="rtitle">數字要記住</div>
+      共 118 種元素 = 金屬 94 種 ＋ 非金屬 24 種<br>
+      天然 88 種 ＋ 人造 30 種 = 118 種
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>元素的第二種分類：常溫常壓的狀態</h3>
+    <table class="tbl">
+      <thead><tr><th>狀態</th><th>數量</th><th>例子</th></tr></thead>
+      <tbody>
+        <tr><td>氣態</td><td>11種</td><td>H、N、O、Cl（非金屬氣體）</td></tr>
+        <tr><td>液態</td><td>2種</td><td>Hg（汞，唯一液態金屬）、Br（溴，唯一液態非金屬）</td></tr>
+        <tr><td>固態</td><td>其餘</td><td>幾乎所有金屬＋部分非金屬</td></tr>
+      </tbody>
+    </table>
+    <div class="wow"><strong>記住！</strong> 常溫下為氣態的，<strong>必定是非金屬</strong>。金屬元素常溫下除了汞（Hg）全部是固體。</div>
+  </div>
+
+  <div class="sec">
+    <h3>點擊元素，認識它</h3>
+    <div style="display:flex;gap:8px;margin-bottom:.75rem;flex-wrap:wrap;">
+      <span class="badge" style="background:#FAEEDA;color:#633806;padding:3px 10px;">■ 金屬</span>
+      <span class="badge" style="background:#E1F5EE;color:#085041;padding:3px 10px;">■ 非金屬</span>
+    </div>
+    <div class="el-grid" id="el-grid"></div>
+    <div id="el-detail">點擊上方任一元素，查看詳細資訊。</div>
+  </div>
+
+  <div class="summary">
+    <h4>這課學到了</h4>
+    <ul>
+      <li>元素是最基本的積木，目前有118種（天然88種）</li>
+      <li>金屬94種，非金屬24種</li>
+      <li>氣態元素一定是非金屬；液態只有汞（金屬）和溴（非金屬）</li>
+      <li>最好的分類方式是依化學性質，這也是週期表的依據</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= LESSON L_atom: 原子構造 ================= -->
+<div class="lesson" id="L_atom">
+  <div class="hook">
+    <div class="hook-label">課前提問</div>
+    <h2>原子有多小？如果原子放大到蘋果那麼大，那顆蘋果放大後，跟地球一樣大。</h2>
+    <p>元素是最基本的積木塊，但積木塊本身也是由更小的東西組成的。搞清楚原子的「內部構造」，你就能理解週期表為什麼那樣排列，以及化學鍵結的根本原理。</p>
+  </div>
+
+  <div class="sec">
+    <h3>原子由三種粒子組成</h3>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:.875rem;">
+      <div class="card" style="border-top:3px solid #185FA5;text-align:center;">
+        <h4>質子</h4>
+        <div style="font-size:20px;font-weight:500;color:#185FA5;margin:6px 0;">p⁺</div>
+        <p>帶<strong>正電</strong>，在原子核中，<strong>決定元素種類</strong></p>
+      </div>
+      <div class="card" style="border-top:3px solid #888780;text-align:center;">
+        <h4>中子</h4>
+        <div style="font-size:20px;font-weight:500;color:#888780;margin:6px 0;">n</div>
+        <p><strong>不帶電</strong>，在原子核中，影響原子量</p>
+      </div>
+      <div class="card" style="border-top:3px solid #EF9F27;text-align:center;">
+        <h4>電子</h4>
+        <div style="font-size:20px;font-weight:500;color:#854F0B;margin:6px 0;">e⁻</div>
+        <p>帶<strong>負電</strong>，在核外繞轉，<strong>決定化學性質</strong></p>
+      </div>
+    </div>
+    <div class="cbox">
+      原子核（質子＋中子）集中了幾乎全部的質量，體積卻極小。<br>
+      中性原子中：<strong>質子數 = 電子數</strong>（正負電荷平衡）
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>最重要的兩個數字</h3>
+    <div class="grid2">
+      <div class="card" style="border-left:4px solid #185FA5;">
+        <h4>原子序（Z）</h4>
+        <p>= <strong>質子數</strong><br>= 中性原子的電子數<br><br>決定是<strong>哪一種元素</strong>。<br>原子序相同 → 必定是同一種元素！</p>
+      </div>
+      <div class="card" style="border-left:4px solid #993C1D;">
+        <h4>原子量（A）</h4>
+        <p>≈ <strong>質子數 + 中子數</strong><br>（電子質量極小可忽略）<br><br>代表原子的<strong>相對質量</strong>。<br><span style="color:#993C1D;">中子數 = 原子量 − 原子序</span></p>
+      </div>
+    </div>
+    <div class="rbox">
+      <div class="rtitle">常用原子量（一定要記！定比定律計算用）</div>
+      H = 1　C = 12　N = 14　O = 16<br>
+      Na = 23　Mg = 24　Cl = 35.5　Ca = 40　Fe = 56
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>用例子練習：質子、電子、中子怎麼算</h3>
+    <div class="card">
+      <table class="tbl" style="margin:0;">
+        <thead><tr><th>元素</th><th>原子序(Z)</th><th>原子量(A)</th><th>質子數</th><th>電子數</th><th>中子數</th></tr></thead>
+        <tbody>
+          <tr><td>H（氫）</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+          <tr><td>C（碳）</td><td>6</td><td>12</td><td>6</td><td>6</td><td>6</td></tr>
+          <tr><td>O（氧）</td><td>8</td><td>16</td><td>8</td><td>8</td><td>8</td></tr>
+          <tr><td>Na（鈉）</td><td>11</td><td>23</td><td>11</td><td>11</td><td>12</td></tr>
+          <tr><td>Cl（氯）</td><td>17</td><td>35.5</td><td>17</td><td>17</td><td>19</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="wow"><strong>計算公式：</strong>中子數 = 原子量 − 原子序。以Cl為例：35.5 − 17 ≈ 18.5，取整數約為18或19（因同位素混合，原子量是小數）</div>
+  </div>
+
+  <div class="sec">
+    <h3>互動：選一個元素，看它的原子構造</h3>
+    <select id="atom-sel" onchange="showAtomInfo()" style="padding:7px 10px;border-radius:8px;border:1px solid #c8c7bf;font-size:13px;width:100%;margin-bottom:.75rem;">
+      <option value="H:1:1">氫 H（原子序1，原子量1）</option>
+      <option value="He:2:4">氦 He（原子序2，原子量4）</option>
+      <option value="C:6:12">碳 C（原子序6，原子量12）</option>
+      <option value="N:7:14">氮 N（原子序7，原子量14）</option>
+      <option value="O:8:16">氧 O（原子序8，原子量16）</option>
+      <option value="Na:11:23">鈉 Na（原子序11，原子量23）</option>
+      <option value="Mg:12:24">鎂 Mg（原子序12，原子量24）</option>
+      <option value="Cl:17:35.5">氯 Cl（原子序17，原子量35.5）</option>
+      <option value="Ca:20:40">鈣 Ca（原子序20，原子量40）</option>
+      <option value="Fe:26:56">鐵 Fe（原子序26，原子量56）</option>
+    </select>
+    <div id="atom-info" class="card"></div>
+  </div>
+
+  <div class="sec">
+    <h3>電子在哪裡？——電子層</h3>
+    <p>電子在固定的「層」上排列，從內往外，每層有最多電子數限制：</p>
+    <table class="tbl">
+      <thead><tr><th>電子層</th><th>最多電子數</th><th>例子（電子排列）</th></tr></thead>
+      <tbody>
+        <tr><td>第一層（最內層）</td><td>2個</td><td>He (2)、H (1)</td></tr>
+        <tr><td>第二層</td><td>8個</td><td>C (2,4)、O (2,6)、Ne (2,8)</td></tr>
+        <tr><td>第三層</td><td>8個（國中）</td><td>Na (2,8,1)、Cl (2,8,7)、Ar (2,8,8)</td></tr>
+      </tbody>
+    </table>
+    <div class="cbox">
+      <strong>最外層電子數</strong>決定化學性質！<br>
+      同族元素的最外層電子數相同 → 化學性質相似（這就是族存在的意義）<br>
+      惰氣族：最外層都是8個電子（He是2個）→ 最穩定，不易反應<br>
+      其他原子的目標：透過鍵結，讓最外層也達到8個電子
+    </div>
+    <div class="rbox">
+      <div class="rtitle">鈉和氯的電子排列——預告下一課</div>
+      Na（鈉）：2, 8, <strong>1</strong> → 最外層只有1個，很想「丟掉它」<br>
+      Cl（氯）：2, 8, <strong>7</strong> → 最外層有7個，只差1個就滿了，很想「搶過來」<br>
+      → Na 把電子給 Cl，兩者各達到穩定的 8 個電子！這就是<strong>離子鍵</strong>（下一課）
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>同位素——同樣的元素，不同的重量</h3>
+    <p>原子序相同（質子數一樣），但<strong>中子數不同</strong>的原子，叫做<strong>同位素</strong>。</p>
+    <div class="grid2">
+      <div class="card">
+        <h4>碳的同位素</h4>
+        <p>¹²C：6質子 ＋ 6中子（最常見）<br>¹³C：6質子 ＋ 7中子<br>¹⁴C：6質子 ＋ 8中子（考古碳定年用）<br><br>三種都是碳（原子序都是6），但原子量不同！</p>
+      </div>
+      <div class="card">
+        <h4>為什麼原子量不是整數？</h4>
+        <p>自然界中一種元素往往有好幾種同位素，按比例混合存在。<br>原子量是各同位素的加權平均值。<br>例如Cl = 35.5（¹⁶Cl和³⁷Cl混合的平均）</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <h4>這課學到了</h4>
+    <ul>
+      <li>原子 = 質子（+）＋ 中子（0）＋ 電子（−），原子核在中間</li>
+      <li>原子序 = 質子數 = 電子數（決定元素種類）</li>
+      <li>原子量 ≈ 質子數 ＋ 中子數；中子數 = 原子量 − 原子序</li>
+      <li>電子層：第一層2個，第二三層最多8個；最外層電子決定化學性質</li>
+      <li>同族元素最外層電子數相同 → 化學性質相似</li>
+      <li>同位素：相同原子序，不同中子數，原子量不同</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= LESSON 2 ================= -->
+<div class="lesson" id="L2">
+  <div class="hook">
+    <div class="hook-label">課前提問</div>
+    <h2>全世界的科學家怎麼溝通？他們用一套所有人都看得懂的符號語言。</h2>
+    <p>不管你是台灣人、美國人還是德國人，看到「H₂O」都知道是水。這套符號系統讓全世界的科學家可以互相交流，不用翻譯。</p>
+  </div>
+
+  <div class="sec">
+    <h3>元素符號怎麼寫？</h3>
+    <div class="grid2">
+      <div class="card" style="border-top:3px solid #185FA5;">
+        <h4>一個字母</h4>
+        <p>必須用<strong>大寫</strong>。<br><br>H（氫）、N（氮）、O（氧）、C（碳）、K（鉀）</p>
+      </div>
+      <div class="card" style="border-top:3px solid #185FA5;">
+        <h4>兩個字母</h4>
+        <p>第一個<strong>大寫</strong>，第二個<strong>小寫</strong>。<br><br>Na（鈉）、Mg（鎂）、Cu（銅）、Ag（銀）</p>
+      </div>
+    </div>
+    <div class="wow"><strong>最常見的錯誤！</strong> 寫 na → 錯。寫 NA → 錯。正確是 Na。大小寫不能搞錯，因為 CO（一氧化碳）和 Co（鈷）是完全不同的東西！</div>
+  </div>
+
+  <div class="sec">
+    <h3>中文元素名稱有規律！</h3>
+    <p>聰明的中文命名法，光看字就知道它在常溫下的狀態：</p>
+    <table class="tbl">
+      <thead><tr><th>常溫狀態</th><th>類別</th><th>字的規律</th><th>例子</th></tr></thead>
+      <tbody>
+        <tr><td>氣態</td><td>非金屬</td><td>「气」字頭</td><td>氫、氮、氧、氟、氯</td></tr>
+        <tr><td>固態</td><td>非金屬</td><td>「石」字旁</td><td>碳、矽、磷、硫、碘</td></tr>
+        <tr><td>固態</td><td>金屬</td><td>「金」字旁</td><td>銅、銀、鉛、錫、鎳</td></tr>
+        <tr><td>液態</td><td>全部</td><td>「水」或「氵」</td><td>汞（Hg）、溴（Br）</td></tr>
+      </tbody>
+    </table>
+    <div class="cbox">
+      看到「氯」→「气」字頭→常溫是氣態，是非金屬<br>
+      看到「碳」→「石」字旁→常溫是固態，是非金屬<br>
+      看到「銅」→「金」字旁→常溫是固態，是金屬<br>
+      看到「汞」→「水」字部→常溫是液態
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>翻牌記憶訓練</h3>
+    <p style="color:#888780;font-size:13px;margin-bottom:.75rem;">點牌面翻轉看答案，測試自己記住了沒。</p>
+    <div class="fc-wrap" onclick="flipCard()">
+      <div class="fc-inner" id="fc-inner">
+        <div class="fc-face">
+          <div class="fc-big" id="fc-front"></div>
+          <div class="fc-hint">點擊翻牌看符號</div>
+        </div>
+        <div class="fc-face fc-back-face">
+          <div class="fc-big" id="fc-sym"></div>
+          <div class="fc-hint" id="fc-type"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-controls">
+      <button class="fc-btn" onclick="fcPrev()">← 上一個</button>
+      <span class="fc-ctr" id="fc-count"></span>
+      <button class="fc-btn" onclick="fcNext()">下一個 →</button>
+    </div>
+    <div class="fc-modes">
+      <button class="fc-mode active" onclick="fcMode('all',this)">全部</button>
+      <button class="fc-mode" onclick="fcMode('metal',this)">只看金屬</button>
+      <button class="fc-mode" onclick="fcMode('nonmetal',this)">只看非金屬</button>
+      <button class="fc-mode" onclick="fcShuffle()">隨機洗牌</button>
+    </div>
+  </div>
+
+  <div class="summary">
+    <h4>這課學到了</h4>
+    <ul>
+      <li>一個字母 → 大寫；兩個字母 → 第一大寫第二小寫</li>
+      <li>气字頭 = 氣態非金屬（氫氧氮氯）</li>
+      <li>石字旁 = 固態非金屬（碳矽硫磷）</li>
+      <li>金字旁 = 固態金屬（銅銀鉛錫）</li>
+      <li>水字部 = 液態（汞Hg、溴Br）</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= LESSON 3 ================= -->
+<div class="lesson" id="L3">
+  <div class="hook">
+    <div class="hook-label">課前提問</div>
+    <h2>氫氣和氧氣混在一起，為什麼點火後不是混合物，而是完全不同的東西？</h2>
+    <p>化合物和混合物長得很像，但它們是根本不同的兩件事。這節課搞懂這個差別，你就能理解99%的化學反應了。</p>
+  </div>
+
+  <div class="sec">
+    <h3>混合 vs 化合：一個故事</h3>
+    <div class="grid2">
+      <div class="card" style="border-top:3px solid #854F0B;">
+        <h4>混合（物理變化）</h4>
+        <p>把氫氣和氧氣裝進同一個罐子，<strong>未達燃點</strong>。<br><br>罐子裡是氫、氧的混合物，保有各自的性質。<br>可以用物理方法（冷卻液化等）分開。</p>
+      </div>
+      <div class="card" style="border-top:3px solid #185FA5;">
+        <h4>化合（化學變化）</h4>
+        <p>把氫氣和氧氣點火，<strong>達到燃點</strong>。<br><br>變成水（H₂O），性質完全不同！<br>水已經不能再用物理方法分成氫和氧。</p>
+      </div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>比較</th><th>化合物</th><th>混合物</th></tr></thead>
+      <tbody>
+        <tr><td>組成</td><td>不同元素依固定比例化學鍵結</td><td>不同純物質依任意比例物理混合</td></tr>
+        <tr><td>性質</td><td>完全不同於組成它的元素</td><td>各成分保有自己的性質</td></tr>
+        <tr><td>分離</td><td>只能用化學方法分解</td><td>可用過濾、蒸餾等物理方法分開</td></tr>
+        <tr><td>成分比例</td><td>固定不變</td><td>可任意調整</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h3>定比定律——化合物的「身分證」</h3>
+    <p>1799年，法國科學家<strong>普魯斯特</strong>發現：任何一種化合物，不管從哪裡來、怎麼做的，組成元素之間的<strong>質量比</strong>永遠固定。</p>
+
+    <div class="cbox">
+      水（H₂O）永遠是 H：O = <strong>1：8</strong>（質量比）<br>
+      因為 H原子量=1，O原子量=16，H₂O含2個H和1個O<br>
+      所以質量比 = 2×1 ÷ 1×16 = 2：16 = <strong>1：8</strong>
+    </div>
+
+    <table class="tbl">
+      <thead><tr><th>化合物</th><th>化學式</th><th>質量比</th><th>計算</th></tr></thead>
+      <tbody>
+        <tr><td>水</td><td>H₂O</td><td>H：O = 1：8</td><td>2：16 = 1：8</td></tr>
+        <tr><td>雙氧水</td><td>H₂O₂</td><td>H：O = 1：16</td><td>2：32 = 1：16</td></tr>
+        <tr><td>一氧化碳</td><td>CO</td><td>C：O = 3：4</td><td>12：16 = 3：4</td></tr>
+        <tr><td>二氧化碳</td><td>CO₂</td><td>C：O = 3：8</td><td>12：32 = 3：8</td></tr>
+      </tbody>
+    </table>
+    <div class="rbox"><div class="rtitle">計算公式</div>原子量：H=1、C=12、N=14、O=16<br>質量比 = 各元素的（原子量 × 原子個數）之比</div>
+  </div>
+
+  <div class="sec">
+    <h3>互動：質量比計算機</h3>
+    <div class="ratio-box">
+      <div style="font-size:13px;color:#5f5e5a;margin-bottom:10px;">選化合物 → 輸入一種元素的質量 → 算出另一種</div>
+      <select id="r-compound" onchange="updateRatio()" style="margin-bottom:10px;width:100%;">
+        <option value="H:O:1:8:水 H₂O">水 H₂O — H：O = 1：8</option>
+        <option value="H:O:1:16:雙氧水 H₂O₂">雙氧水 H₂O₂ — H：O = 1：16</option>
+        <option value="C:O:3:4:一氧化碳 CO">一氧化碳 CO — C：O = 3：4</option>
+        <option value="C:O:3:8:二氧化碳 CO₂">二氧化碳 CO₂ — C：O = 3：8</option>
+      </select>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;">
+        <span id="r-ela" style="font-weight:500;color:#185FA5;min-width:16px;">H</span>
+        <input type="number" id="r-mass" placeholder="克" oninput="calcRatio()" min="0">
+        <span style="color:#888780;">→</span>
+        <span id="r-elb" style="font-weight:500;color:#993C1D;min-width:16px;">O</span>
+        <span id="r-result" style="font-size:15px;font-weight:500;color:#993C1D;">—</span>
+      </div>
+      <div id="r-total" style="margin-top:8px;font-size:13px;color:#3B6D11;font-weight:500;"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>化學史：誰第一個製出氧氣？</h3>
+    <table class="tbl">
+      <thead><tr><th>科學家</th><th>貢獻</th></tr></thead>
+      <tbody>
+        <tr><td><strong>卜利士利</strong>（英國）</td><td>用凸透鏡加熱氧化汞（暗紅色固體），最早製得氧氣<br><span style="color:#888780;font-size:12px;">氧化汞 → 氧氣 ＋ 汞</span></td></tr>
+        <tr><td><strong>拉瓦節</strong>（法國，化學之父）</td><td>① 把那個氣體命名為「氧氣」<br>② 提出質量守恆定律</td></tr>
+        <tr><td><strong>普魯斯特</strong>（法國）</td><td>1799年提出定比定律</td></tr>
+      </tbody>
+    </table>
+    <div class="rbox"><div class="rtitle">容易搞混！</div>製造氧氣的是<strong>卜利士利</strong>，命名氧氣的是<strong>拉瓦節</strong>。考試常考這個！</div>
+  </div>
+
+  <div class="summary">
+    <h4>這課學到了</h4>
+    <ul>
+      <li>化合物：不同元素依固定比例化學鍵結，性質完全改變</li>
+      <li>混合物：任意比例物理混合，各保有原本性質</li>
+      <li>定比定律：同一種化合物，元素質量比永遠固定</li>
+      <li>卜利士利製造氧氣，拉瓦節（化學之父）命名氧氣</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= LESSON L_bond: 化學鍵結 ================= -->
+<div class="lesson" id="L_bond">
+  <div class="hook">
+    <div class="hook-label">課前提問</div>
+    <h2>鈉原子最外層只有1個電子，氯原子最外層有7個電子。它們一相遇，立刻發生了很奇妙的事——兩個都變得超穩定。</h2>
+    <p>原子為什麼要結合在一起？因為孤單的原子大多不穩定，它們想達到最外層8個電子（像惰氣族一樣穩定）。為了達到這個目標，原子有三種策略：給出去、搶過來、或是大家共用。</p>
+  </div>
+
+  <div class="sec">
+    <h3>鍵結的動力：想達到最外層8個電子</h3>
+    <div class="cbox">
+      惰氣族（He、Ne、Ar）最外層都是8個電子（He是2個）→ 極穩定，幾乎不反應<br><br>
+      其他原子最外層電子數大多不是8 → 想透過鍵結達到8個 → 這就是化學反應的根本動力！
+    </div>
+    <div class="grid2">
+      <div class="card" style="text-align:center;">
+        <p style="font-size:12px;color:#888780;">Na 的電子分布</p>
+        <div style="font-size:18px;font-weight:500;margin:.5rem 0;">2, 8, <span style="color:#993C1D;">1</span></div>
+        <p style="font-size:13px;">最外層只有1個 → 很想「丟掉它」，讓第二層的8個變最外層</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <p style="font-size:12px;color:#888780;">Cl 的電子分布</p>
+        <div style="font-size:18px;font-weight:500;margin:.5rem 0;">2, 8, <span style="color:#185FA5;">7</span></div>
+        <p style="font-size:13px;">最外層有7個 → 只差1個就滿了 → 很想「搶1個過來」</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>三種鍵結方式</h3>
+    <div class="act-tabs" id="bond-tabs">
+      <button class="act-tab active" onclick="showBond('ionic',this)">離子鍵</button>
+      <button class="act-tab" onclick="showBond('covalent',this)">共價鍵</button>
+      <button class="act-tab" onclick="showBond('metallic',this)">金屬鍵</button>
+    </div>
+    <div id="bond-display" class="card"></div>
+  </div>
+
+  <div class="sec">
+    <h3>三種鍵結的性質比較</h3>
+    <table class="tbl">
+      <thead><tr><th>鍵結</th><th>組成</th><th>熔沸點</th><th>導電性</th><th>例子</th></tr></thead>
+      <tbody>
+        <tr><td><strong>離子鍵</strong></td><td>金屬＋非金屬</td><td>高</td><td>固態不導電，溶水可導電</td><td>NaCl、KCl、MgO</td></tr>
+        <tr><td><strong>共價鍵</strong></td><td>非金屬＋非金屬</td><td>較低</td><td>通常不導電（石墨例外）</td><td>H₂O、CO₂、H₂、HCl</td></tr>
+        <tr><td><strong>金屬鍵</strong></td><td>純金屬</td><td>差異大</td><td>良導體</td><td>Fe、Cu、Al、Au</td></tr>
+      </tbody>
+    </table>
+    <div class="wow">
+      <strong>連結你之前學過的：</strong><br>
+      為什麼金屬能導電？→ 金屬鍵中自由電子可以移動<br>
+      為什麼NaCl溶水後能導電？→ 離子化合物溶水後，Na⁺和Cl⁻各自自由移動<br>
+      為什麼石墨能導電，其他非金屬不行？→ 石墨有特殊共價結構，有「自由」的π電子
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>快速判斷：什麼鍵結？</h3>
+    <table class="tbl">
+      <thead><tr><th>物質</th><th>組成</th><th>鍵結類型</th></tr></thead>
+      <tbody>
+        <tr><td>食鹽 NaCl</td><td>Na（金屬）＋Cl（非金屬）</td><td><span class="badge bb">離子鍵</span></td></tr>
+        <tr><td>水 H₂O</td><td>H（非金屬）＋O（非金屬）</td><td><span class="badge bt">共價鍵</span></td></tr>
+        <tr><td>氧氣 O₂</td><td>O＋O（非金屬）</td><td><span class="badge bt">共價鍵</span></td></tr>
+        <tr><td>二氧化碳 CO₂</td><td>C（非金屬）＋O（非金屬）</td><td><span class="badge bt">共價鍵</span></td></tr>
+        <tr><td>銅 Cu</td><td>Cu（純金屬）</td><td><span class="badge ba">金屬鍵</span></td></tr>
+        <tr><td>氯化鎂 MgCl₂</td><td>Mg（金屬）＋Cl（非金屬）</td><td><span class="badge bb">離子鍵</span></td></tr>
+      </tbody>
+    </table>
+    <div class="rbox">
+      <div class="rtitle">快速判斷口訣</div>
+      金屬 ＋ 非金屬 → <strong>離子鍵</strong><br>
+      非金屬 ＋ 非金屬 → <strong>共價鍵</strong><br>
+      純金屬 → <strong>金屬鍵</strong>
+    </div>
+  </div>
+
+  <div class="summary">
+    <h4>這課學到了</h4>
+    <ul>
+      <li>原子鍵結的目標：讓最外層達到8個電子的穩定狀態</li>
+      <li>離子鍵：金屬失去電子→陽離子（+），非金屬得到電子→陰離子（−），靜電吸引</li>
+      <li>共價鍵：兩個非金屬原子共用電子對（H₂O、CO₂、H₂等）</li>
+      <li>金屬鍵：自由電子海，解釋了金屬的導電、延展、傳熱性</li>
+      <li>判斷口訣：金屬+非金屬→離子；非金屬+非金屬→共價；純金屬→金屬鍵</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= LESSON 4 ================= -->
+<div class="lesson" id="L4">
+  <div class="hook">
+    <div class="hook-label">課前提問</div>
+    <h2>鉀碰到水為什麼會爆炸？而銅碰到水卻什麼事都沒有？</h2>
+    <p>金屬看起來都差不多，但它們的「個性」差很多。有些金屬超級活潑，見到水就爆炸；有些金屬非常穩定，埋在地底千年都不會銹。這節課，我們用實驗來替金屬排排隊。</p>
+  </div>
+
+  <div class="sec">
+    <h3>金屬活性實驗——三組結果</h3>
+    <div class="act-tabs">
+      <button class="act-tab active" onclick="showAct('kna',this)">K、Na（最活潑）</button>
+      <button class="act-tab" onclick="showAct('mgalznfe',this)">Mg、Al、Zn、Fe</button>
+      <button class="act-tab" onclick="showAct('pbcu',this)">Pb、Cu（不活潑）</button>
+    </div>
+    <div id="act-display"></div>
+  </div>
+
+  <div class="sec">
+    <h3>活性分類結果</h3>
+    <table class="tbl">
+      <thead><tr><th>與水</th><th>與鹽酸</th><th>屬於</th></tr></thead>
+      <tbody>
+        <tr><td>激烈反應</td><td>危險不能做</td><td><strong>K、Na</strong>（最活潑）</td></tr>
+        <tr><td>不反應</td><td>產生氫氣</td><td><strong>Mg、Al、Zn、Fe</strong></td></tr>
+        <tr><td>不反應</td><td>不反應</td><td><strong>Pb、Cu</strong>（最不活潑）</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sec">
+      <h3>重要化學反應式</h3>
+      <table class="tbl">
+        <thead><tr><th>反應</th><th>生成物</th><th>記憶法</th></tr></thead>
+        <tbody>
+          <tr><td>鈉 ＋ 水</td><td>氫氧化鈉 ＋ 氫氣</td><td>金屬＋水 → 氫氧化物＋H₂</td></tr>
+          <tr><td>鉀 ＋ 水</td><td>氫氧化鉀 ＋ 氫氣</td><td>同上，比鈉更劇烈</td></tr>
+          <tr><td>鎂 ＋ 鹽酸</td><td>氯化鎂 ＋ 氫氣</td><td>金屬＋鹽酸 → 氯化物＋H₂</td></tr>
+          <tr><td>鋅 ＋ 鹽酸</td><td>氯化鋅 ＋ 氫氣</td><td>同上</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>金屬 vs 非金屬 性質總比較</h3>
+    <div class="grid2">
+      <div class="card" style="border-top:3px solid #EF9F27;">
+        <h4>金屬</h4>
+        <ul>
+          <li>銀灰色（除金紅銅）</li>
+          <li>熔沸點較高</li>
+          <li>能導電、易傳熱</li>
+          <li>有延展性（敲打不碎）</li>
+          <li>易失去電子</li>
+          <li>氧化物溶水呈鹼性</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top:3px solid #5DCAA5;">
+        <h4>非金屬</h4>
+        <ul>
+          <li>顏色各異，無金屬光澤</li>
+          <li>熔沸點較低</li>
+          <li>大多不導電（石墨例外）</li>
+          <li>無延展性（敲打就碎）</li>
+          <li>易得到電子</li>
+          <li>氧化物溶水呈酸性</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <h4>這課學到了</h4>
+    <ul>
+      <li>金屬依活性分三組：K/Na（最活潑）→ Mg/Al/Zn/Fe → Pb/Cu（不活潑）</li>
+      <li>K、Na必須保存在石油中，不能接觸水或空氣</li>
+      <li>金屬＋水 → 氫氧化物＋氫氣；金屬＋鹽酸 → 氯化物＋氫氣</li>
+      <li>金屬：導電延展；非金屬：不導電易碎</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= LESSON 5 ================= -->
+<div class="lesson" id="L5">
+  <div class="hook">
+    <div class="hook-label">課前提問</div>
+    <h2>1869年，一個俄國科學家做夢，夢到了一張可以預測未來元素的神奇表格。</h2>
+    <p>門得列夫把當時已知的63種元素排成一張表，不只整理現有的元素，還準確預測了幾個當時還沒發現的元素的性質。這張表就是週期表。</p>
+  </div>
+
+  <div class="sec">
+    <h3>週期表的兩個方向</h3>
+    <div class="grid2">
+      <div class="card" style="border-top:3px solid #185FA5; text-align:center;">
+        <h4>族（直行）</h4>
+        <p>同一族的元素，<strong>化學性質相似</strong>。<br>共 18 族。<br><br>因為同族的最外層電子數相同。</p>
+      </div>
+      <div class="card" style="border-top:3px solid #993C1D; text-align:center;">
+        <h4>週期（橫列）</h4>
+        <p>同一週期的元素，<strong>電子層數相同</strong>。<br>共 7 個週期。<br><br>各週期元素數：2、8、8、18、18、32、32</p>
+      </div>
+    </div>
+    <div class="rbox">
+      <div class="rtitle">門得列夫 vs 現代</div>
+      門得列夫的週期表：依<strong>原子量</strong>排列<br>
+      現行週期表：依<strong>原子序</strong>排列（更能反映化學性質）
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>週期表示意圖（點各色塊查看族群特性）</h3>
+    <div class="pt-legend">
+      <div class="pt-leg-item"><div class="pt-leg-dot" style="background:#EF9F27;"></div>鹼金族（IA）</div>
+      <div class="pt-leg-item"><div class="pt-leg-dot" style="background:#97C459;"></div>鹼土族（IIA）</div>
+      <div class="pt-leg-item"><div class="pt-leg-dot" style="background:#F1EFE8;border:1px solid #c8c7bf;"></div>過渡金屬</div>
+      <div class="pt-leg-item"><div class="pt-leg-dot" style="background:#7F77DD;"></div>鹵族（VIIA）</div>
+      <div class="pt-leg-item"><div class="pt-leg-dot" style="background:#D85A30;"></div>惰氣族（VIIIA）</div>
+      <div class="pt-leg-item"><div class="pt-leg-dot" style="background:#E1F5EE;border:1px solid #5DCAA5;"></div>其他非金屬</div>
+    </div>
+    <div class="pt-wrap" id="pt-wrap"></div>
+    <div id="group-info">點上方色塊，查看各族特性。</div>
+  </div>
+
+  <div class="sec">
+    <h3>四大重要族群</h3>
+    <table class="tbl">
+      <thead><tr><th>族群</th><th>位置</th><th>代表元素</th><th>活性趨勢</th><th>特點</th></tr></thead>
+      <tbody>
+        <tr><td><strong>鹼金族（IA）</strong></td><td>最左欄</td><td>Li、Na、K</td><td>由上→下漸<strong>大</strong></td><td>最活潑金屬，遇水放熱釋出H₂，呈鹼性</td></tr>
+        <tr><td><strong>鹼土族（IIA）</strong></td><td>左邊第二欄</td><td>Mg、Ca、Ba</td><td>由上→下漸<strong>大</strong></td><td>鈣是骨骼成分，鎂用於煙火</td></tr>
+        <tr><td><strong>鹵族（VIIA）</strong></td><td>右邊第二欄</td><td>Cl、Br、I</td><td>由上→下漸<strong>小</strong></td><td>最活潑非金屬，可由海水提煉</td></tr>
+        <tr><td><strong>惰氣族（VIIIA）</strong></td><td>最右欄</td><td>He、Ne、Ar</td><td>幾乎不反應</td><td>最安定，又叫貴重氣體</td></tr>
+      </tbody>
+    </table>
+
+    <div class="rbox">
+      <div class="rtitle">鹵族顏色，一定要背！</div>
+      氯（Cl₂）→ 黃綠色氣體<br>
+      溴（Br₂）→ 紅棕色液體<br>
+      碘（I₂）→ 紫黑色固體，遇澱粉變<strong>深藍色</strong>（常考！）
+    </div>
+  </div>
+
+  <div class="summary">
+    <h4>這課學到了</h4>
+    <ul>
+      <li>週期表直行叫「族」（化學性質相似），橫列叫「週期」</li>
+      <li>共18族、7個週期</li>
+      <li>現行週期表依原子序排列（門得列夫依原子量）</li>
+      <li>鹼金族、鹼土族：由上往下活性漸大；鹵族：由上往下活性漸小</li>
+      <li>碘遇澱粉變深藍色</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= LESSON 6 ================= -->
+<div class="lesson" id="L6">
+  <div class="hook">
+    <div class="hook-label">課前提問</div>
+    <h2>你的手機、飛機機身、鑽石戒指、鉛筆筆芯，都跟同樣的幾種元素有關。</h2>
+    <p>這節課認識幾個在日常生活中最重要的元素，弄清楚每個元素有什麼特別的地方、能做什麼用途。</p>
+  </div>
+
+  <div class="sec">
+    <h3>選一個元素來認識</h3>
+    <div class="elem-tabs" id="elem-tabs">
+      <button class="elem-tab active" onclick="showElem('C',this)">碳 C</button>
+      <button class="elem-tab" onclick="showElem('Si',this)">矽 Si</button>
+      <button class="elem-tab" onclick="showElem('S',this)">硫 S</button>
+      <button class="elem-tab" onclick="showElem('Al',this)">鋁 Al</button>
+      <button class="elem-tab" onclick="showElem('Ti',this)">鈦 Ti</button>
+      <button class="elem-tab" onclick="showElem('Cu',this)">銅 Cu</button>
+      <button class="elem-tab" onclick="showElem('Hg',this)">汞 Hg</button>
+      <button class="elem-tab" onclick="showElem('Ag',this)">銀 Ag</button>
+      <button class="elem-tab" onclick="showElem('Au',this)">金 Au</button>
+    </div>
+    <div id="elem-detail"></div>
+  </div>
+
+  <div class="sec">
+    <h3>合金速查表</h3>
+    <table class="tbl">
+      <thead><tr><th>合金名稱</th><th>成分</th><th>主要用途</th></tr></thead>
+      <tbody>
+        <tr><td><strong>青銅</strong></td><td>銅（Cu）＋錫（Sn）</td><td>古代兵器、銅像</td></tr>
+        <tr><td><strong>黃銅</strong></td><td>銅（Cu）＋鋅（Zn）</td><td>水龍頭、樂器</td></tr>
+        <tr><td><strong>K金</strong></td><td>金（Au）＋銅（Cu）</td><td>飾品；24K＝純金</td></tr>
+        <tr><td><strong>鋁合金</strong></td><td>鋁（Al）為主</td><td>飛機機身</td></tr>
+        <tr><td><strong>鈦合金</strong></td><td>鈦（Ti）為主</td><td>航太、眼鏡框</td></tr>
+        <tr><td><strong>銀汞合金</strong></td><td>銀（Ag）＋汞（Hg）</td><td>補牙（近年改用樹脂）</td></tr>
+      </tbody>
+    </table>
+    <div class="rbox">
+      <div class="rtitle">K金計算</div>
+      18K金鍊重60克，含金多少克？<br>
+      60 × 18/24 = <strong>45克</strong>（其餘15克是銅）
+    </div>
+  </div>
+
+  <div class="sec">
+    <h3>地殼元素含量排名</h3>
+    <div class="cbox">
+      <strong>O（氧）> Si（矽）> Al（鋁）> Fe（鐵）</strong><br>
+      鋁是地殼中含量最豐富的金屬元素。<br>
+      地殼中含量最多的固態元素是矽（Si），氧雖然排第一，但主要存在於化合物中。
+    </div>
+  </div>
+
+  <div class="summary">
+    <h4>這課學到了</h4>
+    <ul>
+      <li>碳的三種形態：鑽石（最硬）、石墨（導電、黑鉛）、活性碳（除臭）</li>
+      <li>瓦斯燃燒完全→淡藍色；不完全→黃色，生成有毒一氧化碳</li>
+      <li>鋁表面氧化物緻密→不易繼續銹蝕</li>
+      <li>汞有毒，日光燈水銀電池廢棄後必須回收</li>
+      <li>青銅=Cu+Sn；黃銅=Cu+Zn；18K金含金75%</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= LESSON 7 (QUIZ) ================= -->
+<div class="lesson" id="L7">
+  <div class="hook">
+    <div class="hook-label">第五章總複習</div>
+    <h2>18題挑戰——你已經準備好了！</h2>
+    <p>選完所有題目後按「批改」，每題都有詳細說明。錯的題目要回去查對應的課再看一次。</p>
+  </div>
+
+  <div id="quiz-score" style="margin-bottom:1rem;"></div>
+
+  <div style="display:flex;gap:10px;margin-bottom:1rem;">
+    <button id="check-btn" onclick="checkQuiz()" disabled
+      style="padding:9px 24px;border-radius:999px;border:1px solid #97C459;background:#EAF3DE;color:#3B6D11;font-size:14px;cursor:pointer;font-weight:500;">
+      批改答案
+    </button>
+    <button id="retry-btn" onclick="retryQuiz()"
+      style="display:none;padding:9px 24px;border-radius:999px;border:1px solid #c8c7bf;background:#fff;color:#5f5e5a;font-size:14px;cursor:pointer;">
+      重新作答
+    </button>
+  </div>
+
+  <div id="quiz-container"></div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bnav">
+  <button class="bnav-btn" id="prev-btn" onclick="goLesson(curLesson-1)" disabled>← 上一課</button>
+  <button class="bnav-btn primary" id="next-btn" onclick="goLesson(curLesson+1)">下一課 →</button>
+</div>
+
+<script>
+// ── LESSON NAVIGATION ──
+const lessonIds = ['L0','L1','L_atom','L2','L3','L_bond','L4','L5','L6','L7'];
+let curLesson = 0;
+const totalLessons = lessonIds.length;
+const pills = document.querySelectorAll('.lpill');
+
+function goLesson(n) {
+  if (n < 0 || n >= totalLessons) return;
+  document.getElementById(lessonIds[curLesson]).classList.remove('active');
+  pills[curLesson].classList.remove('active');
+  pills[curLesson].classList.add('done');
+  curLesson = n;
+  document.getElementById(lessonIds[curLesson]).classList.add('active');
+  pills[curLesson].classList.remove('done');
+  pills[curLesson].classList.add('active');
+  window.scrollTo(0,0);
+
+  const pct = Math.round((curLesson/(totalLessons-1))*100);
+  document.getElementById('prog-fill').style.width = pct+'%';
+  document.getElementById('hdr-prog').textContent = '第 '+(curLesson+1)+' 課，共 '+totalLessons+' 課';
+  document.getElementById('prev-btn').disabled = curLesson === 0;
+  document.getElementById('next-btn').disabled = curLesson === totalLessons-1;
+  document.getElementById('next-btn').textContent = curLesson === totalLessons-2 ? '進入測驗 →' : '下一課 →';
+
+  // scroll pill into view
+  pills[curLesson].scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+
+  // lazy inits
+  if (lessonIds[curLesson] === 'L_atom' && !atomBuilt) { showAtomInfo(); atomBuilt=true; }
+  if (lessonIds[curLesson] === 'L_bond' && !bondBuilt) { showBond('ionic', document.querySelector('#bond-tabs .act-tab')); bondBuilt=true; }
+  if (lessonIds[curLesson] === 'L5' && !ptBuilt) buildPT();
+  if (lessonIds[curLesson] === 'L7' && !quizBuilt) buildQuiz();
+}
+
+// ── ELEMENTS DATA ──
+let atomBuilt = false;
+let bondBuilt = false;
+
+// ── ATOMIC STRUCTURE ──
+function showAtomInfo() {
+  const parts = document.getElementById('atom-sel').value.split(':');
+  const sym=parts[0], z=parseInt(parts[1]), a=parseFloat(parts[2]);
+  const n=Math.round(a-z);
+  let remaining=z, shells=[], maxShell=[2,8,8,18];
+  for(let i=0;i<maxShell.length&&remaining>0;i++){
+    const e=Math.min(maxShell[i],remaining); shells.push(e); remaining-=e;
+  }
+  const shellStr=shells.join(', '), outerEl=shells[shells.length-1];
+  const outerMsg=outerEl===8||outerEl===2?'最外層已滿 → <strong style="color:#3B6D11;">穩定（不易反應）</strong>':
+    outerEl<=3?`最外層電子少（${outerEl}個）→ 傾向<strong style="color:#993C1D;">失去電子</strong>，形成陽離子`:
+    outerEl>=6?`最外層電子多（${outerEl}個）→ 傾向<strong style="color:#185FA5;">得到電子</strong>，形成陰離子`:
+    `最外層${outerEl}個電子，化學性質介於中間`;
+  document.getElementById('atom-info').innerHTML=`
+    <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;">
+      <div>
+        <div style="width:64px;height:64px;border-radius:12px;background:#E6F1FB;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:500;color:#185FA5;margin-bottom:8px;">${sym}</div>
+        ${buildAtomSVG(z,shells)}
+      </div>
+      <div style="flex:1;min-width:160px;font-size:13px;line-height:2;">
+        <div>原子序（Z）：<strong>${z}</strong></div>
+        <div>原子量（A）：<strong>${a}</strong></div>
+        <div>質子數：<strong>${z}</strong></div>
+        <div>電子數：<strong>${z}</strong>（中性原子）</div>
+        <div>中子數：<strong>${n}</strong>（≈${a}−${z}）</div>
+        <div>電子排列：<strong>${shellStr}</strong></div>
+        <div>最外層電子：<strong>${outerEl}</strong>個</div>
+        <div style="margin-top:6px;padding:.5rem .75rem;background:#f5f4f0;border-radius:8px;font-size:12px;line-height:1.6;">${outerMsg}</div>
+      </div>
+    </div>`;
+}
+function buildAtomSVG(z,shells){
+  const cx=80,cy=80,radii=[18,36,56,76];
+  let svg=`<svg width="160" height="160" viewBox="0 0 160 160">`;
+  svg+=`<circle cx="${cx}" cy="${cy}" r="13" fill="#185FA5" opacity=".9"/>`;
+  svg+=`<text x="${cx}" y="${cy+4}" text-anchor="middle" font-size="8" fill="#fff" font-family="sans-serif" font-weight="500">${z}p</text>`;
+  shells.forEach((count,si)=>{
+    const r=radii[si];
+    svg+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#c8c7bf" stroke-width=".7" stroke-dasharray="3,2"/>`;
+    for(let ei=0;ei<count;ei++){
+      const angle=(2*Math.PI*ei/count)-(Math.PI/2);
+      const ex=cx+r*Math.cos(angle),ey=cy+r*Math.sin(angle);
+      svg+=`<circle cx="${ex.toFixed(1)}" cy="${ey.toFixed(1)}" r="5" fill="#EF9F27" stroke="#BA7517" stroke-width=".5"/>`;
+    }
+  });
+  svg+=`<text x="${cx}" y="152" text-anchor="middle" font-size="9" fill="#888780" font-family="sans-serif">● 電子</text>`;
+  svg+=`</svg>`;
+  return svg;
+}
+setTimeout(showAtomInfo, 100);
+
+// ── CHEMICAL BONDING ──
+const bondData={
+  ionic:{title:'離子鍵 ── 一個給、一個收，靠靜電吸在一起',
+    html:`<div style="font-size:13px;line-height:1.75;margin-bottom:12px;"><strong>條件：金屬元素 ＋ 非金屬元素</strong><br>金屬原子把最外層電子「給出去」→ 變成帶正電的<strong>陽離子（＋）</strong><br>非金屬原子「接收電子」→ 變成帶負電的<strong>陰離子（−）</strong><br>正負離子靠靜電引力吸在一起，形成離子鍵。</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;font-size:13px;background:#f5f4f0;border-radius:10px;padding:1rem;">
+      <div style="text-align:center;"><div style="width:50px;height:50px;border-radius:50%;background:#FAEEDA;border:2px solid #EF9F27;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;color:#633806;margin:0 auto 4px;">Na</div><div style="font-size:11px;color:#888780;">2,8,<span style="color:#993C1D;font-weight:700;">1</span></div></div>
+      <div style="font-size:16px;color:#888780;">→</div>
+      <div style="text-align:center;"><div style="width:50px;height:50px;border-radius:50%;background:#E6F1FB;border:2px solid #378ADD;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:#0C447C;margin:0 auto 4px;">Na⁺</div><div style="font-size:11px;color:#888780;">2,8（失1e⁻）</div></div>
+      <div style="font-size:20px;color:#185FA5;font-weight:500;">+</div>
+      <div style="text-align:center;"><div style="width:50px;height:50px;border-radius:50%;background:#E1F5EE;border:2px solid #5DCAA5;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;color:#085041;margin:0 auto 4px;">Cl</div><div style="font-size:11px;color:#888780;">2,8,<span style="color:#185FA5;font-weight:700;">7</span></div></div>
+      <div style="font-size:16px;color:#888780;">→</div>
+      <div style="text-align:center;"><div style="width:50px;height:50px;border-radius:50%;background:#EAF3DE;border:2px solid #97C459;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:#27500A;margin:0 auto 4px;">Cl⁻</div><div style="font-size:11px;color:#888780;">2,8,8（得1e⁻）</div></div>
+      <div style="font-size:16px;color:#888780;">→</div>
+      <div style="font-size:18px;font-weight:500;color:#185FA5;">NaCl</div>
+    </div>
+    <div style="background:#EAF3DE;border-radius:8px;padding:.625rem .875rem;font-size:12px;color:#27500A;line-height:1.6;">性質：高熔點（NaCl熔點801°C）、固態不導電、<strong>溶於水後可導電</strong>（Na⁺和Cl⁻自由移動）</div>`},
+  covalent:{title:'共價鍵 ── 共用電子，誰也不虧',
+    html:`<div style="font-size:13px;line-height:1.75;margin-bottom:12px;"><strong>條件：非金屬元素 ＋ 非金屬元素</strong><br>兩個原子各拿出一個（或多個）電子，形成<strong>共用電子對</strong>，兩個原子各自把共用電子計入自己的最外層。兩者都達到穩定，皆大歡喜。</div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px;">
+      <thead><tr style="background:#f5f4f0;"><th style="padding:6px 8px;text-align:left;font-weight:500;color:#5f5e5a;">分子</th><th style="padding:6px 8px;text-align:left;font-weight:500;color:#5f5e5a;">結構式</th><th style="padding:6px 8px;text-align:left;font-weight:500;color:#5f5e5a;">共用電子對數</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e8e7df;"><td style="padding:6px 8px;">H₂（氫氣）</td><td style="padding:6px 8px;font-family:monospace;font-size:14px;">H — H</td><td style="padding:6px 8px;">1對（單鍵）</td></tr>
+        <tr style="border-bottom:1px solid #e8e7df;"><td style="padding:6px 8px;">H₂O（水）</td><td style="padding:6px 8px;font-family:monospace;font-size:14px;">H — O — H</td><td style="padding:6px 8px;">各1對，共2對</td></tr>
+        <tr style="border-bottom:1px solid #e8e7df;"><td style="padding:6px 8px;">O₂（氧氣）</td><td style="padding:6px 8px;font-family:monospace;font-size:14px;">O ═ O</td><td style="padding:6px 8px;">2對（雙鍵）</td></tr>
+        <tr><td style="padding:6px 8px;">CO₂</td><td style="padding:6px 8px;font-family:monospace;font-size:14px;">O ═ C ═ O</td><td style="padding:6px 8px;">各2對，共4對</td></tr>
+      </tbody>
+    </table>
+    <div style="background:#E6F1FB;border-radius:8px;padding:.625rem .875rem;font-size:12px;color:#0C447C;line-height:1.6;">性質：熔沸點通常比離子化合物低、大多<strong>不導電</strong>（共用電子不能自由移動）</div>`},
+  metallic:{title:'金屬鍵 ── 電子海，大家共用',
+    html:`<div style="font-size:13px;line-height:1.75;margin-bottom:12px;"><strong>條件：純金屬</strong><br>金屬原子把最外層電子釋放出來，這些電子不屬於任何特定原子，而是在整個金屬中<strong>自由流動</strong>，形成「電子海」。帶正電的金屬離子浸在電子海中，靠靜電力維持在一起。</div>
+    <div style="background:#f5f4f0;border-radius:10px;padding:1rem;margin-bottom:12px;text-align:center;">
+      <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:6px;">${Array(9).fill(0).map(()=>'<div style="width:32px;height:32px;border-radius:50%;background:#FAEEDA;border:1.5px solid #EF9F27;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:#633806;">M⁺</div>').join('')}</div>
+      <div style="font-size:11px;color:#888780;">金屬陽離子排列成晶格，電子在縫隙間自由流動（電子海）</div>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead><tr style="background:#f5f4f0;"><th style="padding:6px 8px;text-align:left;font-weight:500;color:#5f5e5a;">金屬特性</th><th style="padding:6px 8px;text-align:left;font-weight:500;color:#5f5e5a;">金屬鍵的解釋</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e8e7df;"><td style="padding:6px 8px;">能導電</td><td style="padding:6px 8px;">自由電子可以定向移動，傳遞電荷</td></tr>
+        <tr style="border-bottom:1px solid #e8e7df;"><td style="padding:6px 8px;">能傳熱</td><td style="padding:6px 8px;">自由電子快速傳遞熱能</td></tr>
+        <tr><td style="padding:6px 8px;">有延展性</td><td style="padding:6px 8px;">金屬離子層滑動時，電子海繼續維持結構，不會斷裂</td></tr>
+      </tbody>
+    </table>`}
+};
+function showBond(key,btn){
+  document.querySelectorAll('#bond-tabs .act-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const d=bondData[key];
+  document.getElementById('bond-display').innerHTML=
+    `<div style="font-size:14px;font-weight:500;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e0dfd7;">${d.title}</div>${d.html}`;
+}
+
+const metals = [
+  {sym:'Hg',name:'汞',state:'液',fact:'唯一液態金屬，有毒，用於溫度計'},
+  {sym:'Na',name:'鈉',state:'固',fact:'遇水激烈反應，保存於石油中'},
+  {sym:'K', name:'鉀',state:'固',fact:'比鈉更活潑，鹼金族'},
+  {sym:'Li',name:'鋰',state:'固',fact:'密度最小的金屬，鋰電池原料'},
+  {sym:'Mg',name:'鎂',state:'固',fact:'可用於煙火，鋁鎂合金製飛機'},
+  {sym:'Ca',name:'鈣',state:'固',fact:'骨骼、牙齒、貝殼的主要成分'},
+  {sym:'Ba',name:'鋇',state:'固',fact:'鹼土族，活性大'},
+  {sym:'Al',name:'鋁',state:'固',fact:'地殼中含量最豐富的金屬，密度約鐵的1/3'},
+  {sym:'Sn',name:'錫',state:'固',fact:'青銅=銅+錫'},
+  {sym:'Pb',name:'鉛',state:'固',fact:'化性不活潑，不與鹽酸反應'},
+  {sym:'Ti',name:'鈦',state:'固',fact:'鈦合金輕且堅硬，用於航太工業'},
+  {sym:'Cr',name:'鉻',state:'固',fact:'不鏽鋼含Cr和Ni'},
+  {sym:'Mn',name:'錳',state:'固',fact:''},
+  {sym:'Fe',name:'鐵',state:'固',fact:'鐵礦石煉成生鐵，再製鋼'},
+  {sym:'Co',name:'鈷',state:'固',fact:''},
+  {sym:'Ni',name:'鎳',state:'固',fact:'不鏽鋼含Ni'},
+  {sym:'Zn',name:'鋅',state:'固',fact:'黃銅=銅+鋅，鍍鋅防鏽'},
+  {sym:'W', name:'鎢',state:'固',fact:'熔點最高的金屬，用於電燈泡燈絲'},
+  {sym:'Cu',name:'銅',state:'固',fact:'導電性僅次於銀，製電線'},
+  {sym:'Ag',name:'銀',state:'固',fact:'導電導熱最佳，碘化銀可人工造雨'},
+  {sym:'Pt',name:'鉑',state:'固',fact:''},
+  {sym:'Au',name:'金',state:'固',fact:'延展性最佳，活性最小，24K=純金'},
+];
+const nonmetals = [
+  {sym:'H', name:'氫',state:'氣',fact:'密度最小的元素'},
+  {sym:'N', name:'氮',state:'氣',fact:'空氣中最多的氣體(78%)'},
+  {sym:'O', name:'氧',state:'氣',fact:'地殼中含量最多的元素'},
+  {sym:'Cl',name:'氯',state:'氣',fact:'黃綠色有毒氣體，製漂白粉'},
+  {sym:'Br',name:'溴',state:'液',fact:'唯一液態非金屬，紅棕色'},
+  {sym:'C', name:'碳',state:'固',fact:'鑽石/石墨/活性碳都是碳的同素異形體'},
+  {sym:'Si',name:'矽',state:'固',fact:'地殼中含量第2，製半導體'},
+  {sym:'P', name:'磷',state:'固',fact:'紅磷/白磷是同素異形體'},
+  {sym:'S', name:'硫',state:'固',fact:'黃色固體，燃燒生成有毒SO₂'},
+  {sym:'I', name:'碘',state:'固',fact:'紫黑色，遇澱粉呈深藍色'},
+];
+
+function buildElGrid() {
+  const g = document.getElementById('el-grid');
+  let html = '';
+  metals.forEach(e => {
+    html += `<div class="el-tile metal" onclick="showEl('${e.sym}','metal')"><div class="et-sym">${e.sym}</div><div class="et-name">${e.name}</div><div class="et-state">${e.state}態</div></div>`;
+  });
+  nonmetals.forEach(e => {
+    html += `<div class="el-tile nonmetal" onclick="showEl('${e.sym}','nonmetal')"><div class="et-sym">${e.sym}</div><div class="et-name">${e.name}</div><div class="et-state">${e.state}態</div></div>`;
+  });
+  g.innerHTML = html;
+}
+function showEl(sym, type) {
+  document.querySelectorAll('.el-tile').forEach(t=>t.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+  const all = [...metals,...nonmetals];
+  const e = all.find(x=>x.sym===sym);
+  document.getElementById('el-detail').innerHTML =
+    `<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <div style="width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:500;background:${type==='metal'?'#FAEEDA':'#E1F5EE'};color:${type==='metal'?'#633806':'#085041'};">${e.sym}</div>
+      <div><div style="font-size:16px;font-weight:500;">${e.name}（${e.sym}）</div>
+      <div style="font-size:12px;color:#888780;">${type==='metal'?'金屬':'非金屬'}・常溫${e.state}態</div></div>
+    </div>
+    <div style="font-size:13px;color:#5f5e5a;">${e.fact||'常見元素，需熟記符號。'}</div>`;
+}
+buildElGrid();
+
+// ── FLASHCARD ──
+let fcDeck = [...metals,...nonmetals];
+let fcIdx = 0;
+let fcFlipped = false;
+
+function fcMode(mode, btn) {
+  document.querySelectorAll('.fc-mode').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if (mode==='metal') fcDeck = [...metals];
+  else if (mode==='nonmetal') fcDeck = [...nonmetals];
+  else fcDeck = [...metals,...nonmetals];
+  fcIdx = 0; fcFlipped = false;
+  document.getElementById('fc-inner').classList.remove('flipped');
+  renderFC();
+}
+function fcShuffle() {
+  for(let i=fcDeck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[fcDeck[i],fcDeck[j]]=[fcDeck[j],fcDeck[i]];}
+  fcIdx=0; fcFlipped=false; document.getElementById('fc-inner').classList.remove('flipped'); renderFC();
+}
+function renderFC() {
+  const e = fcDeck[fcIdx];
+  document.getElementById('fc-front').textContent = e.name;
+  document.getElementById('fc-sym').textContent = e.sym;
+  document.getElementById('fc-type').textContent = (metals.includes(e)?'金屬':'非金屬')+'・'+e.state+'態';
+  document.getElementById('fc-count').textContent = (fcIdx+1)+' / '+fcDeck.length;
+  fcFlipped = false;
+  document.getElementById('fc-inner').classList.remove('flipped');
+}
+function flipCard(){ fcFlipped=!fcFlipped; document.getElementById('fc-inner').classList.toggle('flipped',fcFlipped); }
+function fcNext(){ event.stopPropagation(); fcIdx=(fcIdx+1)%fcDeck.length; renderFC(); }
+function fcPrev(){ event.stopPropagation(); fcIdx=(fcIdx-1+fcDeck.length)%fcDeck.length; renderFC(); }
+renderFC();
+
+// ── RATIO CALC ──
+let rRatio = [1,8];
+function updateRatio(){
+  const p = document.getElementById('r-compound').value.split(':');
+  document.getElementById('r-ela').textContent = p[0];
+  document.getElementById('r-elb').textContent = p[1];
+  rRatio = [parseFloat(p[2]), parseFloat(p[3])];
+  document.getElementById('r-mass').value='';
+  document.getElementById('r-result').textContent='—';
+  document.getElementById('r-total').textContent='';
+}
+function calcRatio(){
+  const a=parseFloat(document.getElementById('r-mass').value);
+  if(isNaN(a)||a<=0){document.getElementById('r-result').textContent='—';document.getElementById('r-total').textContent='';return;}
+  const b=(a/rRatio[0])*rRatio[1];
+  document.getElementById('r-result').textContent=b.toFixed(2)+' 克';
+  document.getElementById('r-total').textContent='合計：'+(a+b).toFixed(2)+' 克（質量守恆）';
+}
+
+// ── ACTIVITY EXPERIMENT ──
+const actData = {
+  kna:{title:'K、Na — 最活潑，非常危險',color:'#FAECE7',
+    rows:[['新切面外觀','銀灰色，有金屬光澤'],['在水中','上浮（密度＜水）'],['與水的反應','激烈！生成氫氧化物＋氫氣，大量放熱'],['加酚酞顏色','無色→紅色（鹼性）'],['與鹽酸反應','反應太激烈，有爆炸危險！不可操作']],
+    warn:'K和Na必須保存在石油中，不可接觸水或皮膚！'},
+  mgalznfe:{title:'Mg、Al、Zn、Fe — 中等活性',color:'#FAEEDA',
+    rows:[['新切面外觀','銀灰色，有金屬光澤'],['在水中','下沉（密度＞水）'],['與水的反應','不反應'],['加酚酞顏色','仍為無色'],['與鹽酸反應','產生氣泡（生成氯化物＋氫氣）']],
+    warn:'這四種金屬與鹽酸反應都冒泡，記住：金屬＋鹽酸 → 氯化物＋H₂'},
+  pbcu:{title:'Pb、Cu — 較不活潑',color:'#EAF3DE',
+    rows:[['Pb新切面','銀灰色，有金屬光澤'],['Cu新切面','紅銅色，有金屬光澤'],['在水中','下沉'],['與水的反應','不反應'],['與鹽酸反應','不反應（—）']],
+    warn:'Pb和Cu化性最不活潑，連鹽酸也不理。'}
+};
+function showAct(key,btn){
+  document.querySelectorAll('.act-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const d=actData[key];
+  const rows=d.rows.map(r=>`<tr><td style="color:#888780;padding:6px 8px;border-bottom:1px solid #f0efe7;font-size:13px;white-space:nowrap;">${r[0]}</td><td style="padding:6px 8px;border-bottom:1px solid #f0efe7;font-size:13px;">${r[1]}</td></tr>`).join('');
+  document.getElementById('act-display').innerHTML=
+    `<div style="font-size:13px;font-weight:500;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #c8c7bf;">${d.title}</div>
+     <table style="width:100%;border-collapse:collapse;">${rows}</table>
+     <div style="background:${d.color};border-radius:8px;padding:.625rem .875rem;margin-top:10px;font-size:13px;color:#3d3d3a;">${d.warn}</div>`;
+}
+showAct('kna', document.querySelector('.act-tab'));
+
+// ── PERIODIC TABLE ──
+let ptBuilt = false;
+const groupInfo = {
+  alk: {name:'鹼金族（IA）', text:'位置：週期表最左欄（第1族）<br>包含：Li、Na、K、Rb、Cs<br>特性：最活潑金屬，遇水激烈反應，釋出H₂，溶液呈鹼性<br>活性：原子序越大越活潑（K ＞ Na ＞ Li）<br>保存：須存放於石油中，不可接觸水或空氣'},
+  alt: {name:'鹼土族（IIA）', text:'位置：左邊第二欄（第2族）<br>包含：Mg、Ca、Ba<br>特性：次活潑金屬，氧化物水溶液呈鹼性<br>活性：原子序越大越活潑（Ba ＞ Ca ＞ Mg）<br>鈣（Ca）是骨骼、牙齒、貝殼的主要成分'},
+  hal: {name:'鹵族（VIIA）', text:'位置：右邊第二欄（第17族）<br>包含：Cl、Br、I<br>特性：最活潑非金屬，可由海水提煉<br>活性：原子序越大越不活潑（Cl ＞ Br ＞ I）<br>顏色：Cl₂黃綠色氣體，Br₂紅棕色液體，I₂紫黑色固體<br>碘遇澱粉變深藍色！'},
+  nob: {name:'惰氣族（VIIIA）', text:'位置：最右欄（第18族）<br>包含：He、Ne、Ar<br>特性：最安定，幾乎不與任何物質反應<br>又稱「貴重氣體（noble gas）」<br>He填充氣球（比H₂安全），Ne做霓虹燈'},
+  tr:  {name:'過渡金屬（B族）', text:'位置：中間大塊（第3-12族）<br>包含：Fe、Cu、Zn、Cr、Mn、Ni、W、Au、Ag、Pt等<br>特性：一般金屬性質，導電、延展、金屬光澤<br>很多重要的生活金屬都在這裡'},
+  nm:  {name:'其他非金屬', text:'包含：C（碳）、Si（矽）、N（氮）、O（氧）、H（氫）等<br>這些元素位於週期表右上角<br>與金屬性質相反：不導電（石墨例外）、易碎、無金屬光澤'}
+};
+function buildPT() {
+  ptBuilt = true;
+  // Simplified 7-period periodic table layout
+  // Format: [symbol, class] or null for empty
+  const layout = [
+    [['H','alk'],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,['He','nob']],
+    [['Li','alk'],['Be','alt'],null,null,null,null,null,null,null,null,null,null,['B','nm'],['C','nm'],['N','nm'],['O','nm'],['F','hal'],['Ne','nob']],
+    [['Na','alk'],['Mg','alt'],null,null,null,null,null,null,null,null,null,null,['Al','m'],['Si','nm'],['P','nm'],['S','nm'],['Cl','hal'],['Ar','nob']],
+    [['K','alk'],['Ca','alt'],['Sc','tr'],['Ti','tr'],['V','tr'],['Cr','tr'],['Mn','tr'],['Fe','tr'],['Co','tr'],['Ni','tr'],['Cu','tr'],['Zn','tr'],['Ga','m'],['Ge','nm'],['As','nm'],['Se','nm'],['Br','hal'],['Kr','nob']],
+    [['Rb','alk'],['Sr','alt'],['Y','tr'],['Zr','tr'],['Nb','tr'],['Mo','tr'],['Tc','tr'],['Ru','tr'],['Rh','tr'],['Pd','tr'],['Ag','tr'],['Cd','tr'],['In','m'],['Sn','m'],['Sb','nm'],['Te','nm'],['I','hal'],['Xe','nob']],
+    [['Cs','alk'],['Ba','alt'],['*','tr'],['Hf','tr'],['Ta','tr'],['W','tr'],['Re','tr'],['Os','tr'],['Ir','tr'],['Pt','tr'],['Au','tr'],['Hg','m'],['Tl','m'],['Pb','m'],['Bi','m'],['Po','m'],['At','hal'],['Rn','nob']],
+    [['Fr','alk'],['Ra','alt'],['**','tr'],['Rf','tr'],['Db','tr'],['Sg','tr'],['Bh','tr'],['Hs','tr'],['Mt','tr'],['Ds','tr'],['Rg','tr'],['Cn','tr'],['Nh','m'],['Fl','m'],['Mc','m'],['Lv','m'],['Ts','hal'],['Og','nob']],
+  ];
+
+  let html = '';
+  layout.forEach(row => {
+    html += '<div class="pt-row">';
+    row.forEach(cell => {
+      if (!cell) html += '<div class="ptc empty"></div>';
+      else html += `<div class="ptc ${cell[1]}" onclick="showGroup('${cell[1]}')" title="${cell[0]}">${cell[0]}</div>`;
+    });
+    html += '</div>';
+  });
+  document.getElementById('pt-wrap').innerHTML = html;
+}
+function showGroup(cls) {
+  const d = groupInfo[cls] || groupInfo['nm'];
+  document.getElementById('group-info').innerHTML =
+    `<div style="font-size:13px;font-weight:500;margin-bottom:8px;color:#185FA5;">${d.name}</div>
+     <div style="font-size:13px;color:#3d3d3a;line-height:1.75;">${d.text}</div>`;
+}
+
+// ── ELEMENT DETAILS (Lesson 6) ──
+const elemDetails = {
+  C: {color:'#EEEDFE',tc:'#3C3489',
+    html:`<div class="card" style="border-left:4px solid #7F77DD;">
+    <h4>碳 C ── 同素異形體之王</h4>
+    <p>同一種元素（碳），卻能有完全不同的面貌！這叫做<strong>同素異形體</strong>。</p>
+    <table class="tbl" style="margin-top:10px;">
+      <thead><tr><th>形態</th><th>外觀</th><th>特性</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td>鑽石</td><td>透明</td><td>最堅硬的物質</td><td>珠寶、切割工具</td></tr>
+        <tr><td>石墨（黑鉛）</td><td>黑色</td><td>唯一導電的固態非金屬</td><td>鉛筆芯、乾電池正極、潤滑劑</td></tr>
+        <tr><td>活性碳</td><td>黑色多孔</td><td>多孔可吸附雜質</td><td>除臭、脫色、淨水器</td></tr>
+      </tbody>
+    </table>
+    <div class="rbox" style="margin-top:10px;"><div class="rtitle">瓦斯燃燒顏色！考試必考</div>
+    完全燃燒 → 淡藍色火焰<br>
+    不完全燃燒 → 黃色火焰＋黑煙＋有毒一氧化碳（CO）</div>
+    </div>`},
+  Si: {color:'#E1F5EE',tc:'#085041',
+    html:`<div class="card" style="border-left:4px solid #5DCAA5;">
+    <h4>矽 Si ── 科技的基石</h4>
+    <ul>
+      <li>矽石、砂石、石英、水晶的主成分均為矽</li>
+      <li>地殼中含量第二多的元素（僅次於氧），前四名：O > Si > Al > Fe</li>
+      <li>矽晶圓可製作<strong>電晶體（半導體）</strong>，讓電器體積更小功能更強</li>
+      <li>玻璃和水泥多以矽的化合物製成</li>
+    </ul>
+    </div>`},
+  S: {color:'#FAEEDA',tc:'#633806',
+    html:`<div class="card" style="border-left:4px solid #EF9F27;">
+    <h4>硫 S ── 黃色固體</h4>
+    <ul>
+      <li>常溫下是<strong>黃色固體</strong></li>
+      <li>燃燒時產生<strong>淡藍色</strong>火焰，及無色、刺激臭味且有毒的<strong>二氧化硫（SO₂）</strong></li>
+      <li>元素態硫磺大都分布在火山附近</li>
+      <li>用途：製造火藥、硫酸等重要化學藥品</li>
+      <li>血液、毛髮中含大量蛋白質，動物屍體腐爛的臭味來自含硫的氣體</li>
+    </ul>
+    </div>`},
+  Al: {color:'#E6F1FB',tc:'#0C447C',
+    html:`<div class="card" style="border-left:4px solid #185FA5;">
+    <h4>鋁 Al ── 地殼最多的金屬</h4>
+    <ul>
+      <li>地殼中含量<strong>最豐富</strong>的金屬，密度約鐵的 1/3</li>
+      <li>鋁合金：密度小且堅硬，是製造<strong>飛機</strong>最理想的材料（缺點：不耐撞擊摩擦）</li>
+      <li>鋁活性大，但表面氧化物（Al₂O₃）<strong>緻密不易脫落</strong>，形成保護層，故反而<strong>不易銹蝕</strong></li>
+      <li>常見：鋁門窗、鋁箔包、鋁箔紙</li>
+    </ul>
+    <div class="wow" style="margin-top:10px;"><strong>反直覺！</strong>鋁其實很容易氧化，但正因如此，表面立刻形成氧化層保護內部。和鐵不同——鐵鏽會剝落，越來越爛；鋁的氧化層卻很穩固。</div>
+    </div>`},
+  Ti: {color:'#EEEDFE',tc:'#3C3489',
+    html:`<div class="card" style="border-left:4px solid #7F77DD;">
+    <h4>鈦 Ti ── 航太金屬</h4>
+    <ul>
+      <li>鈦合金：<strong>堅硬質輕</strong>，廣泛用於軍事和航太工業，也做眼鏡框架、腳踏車</li>
+      <li>二氧化鈦（TiO₂）做成奈米級材料，就是「奈米光觸媒」，可吸收紫外光產生光化學反應，達到殺菌效果</li>
+      <li>二氧化鈦是製造<strong>白色塗料、立可白</strong>的主要原料</li>
+    </ul>
+    </div>`},
+  Cu: {color:'#FAECE7',tc:'#712B13',
+    html:`<div class="card" style="border-left:4px solid #F0997B;">
+    <h4>銅 Cu ── 紅銅色導線</h4>
+    <ul>
+      <li>導電性僅次於銀（Ag），但銅比較便宜，所以電線用銅做</li>
+      <li>新切面呈<strong>紅銅色</strong>（唯一不是銀灰色的常見金屬）</li>
+      <li><strong>青銅</strong> = Cu ＋ Sn（錫）的合金</li>
+      <li><strong>黃銅</strong> = Cu ＋ Zn（鋅）的合金</li>
+    </ul>
+    </div>`},
+  Hg: {color:'#E1F5EE',tc:'#085041',
+    html:`<div class="card" style="border-left:4px solid #5DCAA5;">
+    <h4>汞 Hg（水銀）── 唯一液態金屬</h4>
+    <ul>
+      <li>熔點 −38.9°C，沸點 357°C，常溫下是<strong>唯一液態金屬</strong></li>
+      <li>常用於溫度計及氣壓計</li>
+      <li><strong>汞蒸氣及大部分汞化合物有毒！</strong>日光燈、水銀電池、溫度計廢棄後均必須回收</li>
+      <li>不慎灑出：用真空吸取法；縫隙中可灑<strong>鋅粉或硫粉</strong>使其固化，再吸取</li>
+    </ul>
+    </div>`},
+  Ag: {color:'#F1EFE8',tc:'#5F5E5A',
+    html:`<div class="card" style="border-left:4px solid #888780;">
+    <h4>銀 Ag ── 導電第一名</h4>
+    <ul>
+      <li><strong>導電及導熱性最佳</strong>的金屬（但太貴，所以電線用銅）</li>
+      <li>主要用於製造錢幣、飾物和高級餐具</li>
+      <li>銀粉＋汞 的合金可填補牙齒（近年改用樹脂，因汞易汙染環境）</li>
+      <li>火山地區含硫化氫（H₂S），銀製品在那裡會變<strong>黑色</strong>，不宜帶銀製品去溫泉</li>
+      <li><strong>碘化銀（AgI）</strong>可用來人工造雨</li>
+    </ul>
+    </div>`},
+  Au: {color:'#FAEEDA',tc:'#633806',
+    html:`<div class="card" style="border-left:4px solid #EF9F27;">
+    <h4>金 Au ── 延展冠軍</h4>
+    <ul>
+      <li><strong>延展性最佳</strong>的金屬（可打成極薄的金箔）</li>
+      <li>日常生活中<strong>活性最小</strong>的金屬（化性穩定，不易銹蝕）</li>
+      <li><strong>K金（開金）</strong>= 金 ＋ 銅 的合金；純金定為 24K</li>
+      <li>容易導熱和導電，用於電子工業做抗腐蝕導線</li>
+    </ul>
+    <div class="rbox" style="margin-top:10px;"><div class="rtitle">K金計算</div>18K金項鍊重60克，含金多少克？<br>60 × 18/24 = <strong>45克</strong></div>
+    </div>`},
+};
+function showElem(sym, btn) {
+  document.querySelectorAll('.elem-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('elem-detail').innerHTML = elemDetails[sym].html;
+}
+showElem('C', document.querySelector('.elem-tab'));
+
+// ── QUIZ ──
+let quizBuilt = false;
+const qData = [
+  {q:'1. 下列哪一種元素的化學性質與其他三者不同？',opts:['Al','Mg','Ba','Ca'],ans:0,ex:'Mg、Ba、Ca 都是鹼土族（IIA族），Al 是 IIIA 族，化學性質不同。',lesson:5},
+  {q:'2. 元素週期表中，「族」是運用各元素的何種特性相似而予以分類？',opts:['原子序','原子量','化學性質','物理性質'],ans:2,ex:'同一族的元素化學性質相似，這也是週期表的設計核心。',lesson:5},
+  {q:'3. 下列有關金屬的敘述，何者錯誤？',opts:['Hg 的熔點最低','Au 的延展性最佳','W 的熔點最高','Cu 的導電性最好'],ans:3,ex:'導電性最好的是 Ag（銀），Cu 排第二。',lesson:4},
+  {q:'4. 下列有關金屬與非金屬之敘述，何者錯誤？',opts:['非金屬元素的數目較金屬元素多','非金屬元素以固態、液態或氣態存在','非金屬大多是熱和電的不良導體','金屬元素大多呈銀灰色，非金屬的顏色較複雜'],ans:0,ex:'金屬有94種，非金屬只有24種，金屬元素數目遠多於非金屬。',lesson:1},
+  {q:'5. 下列科學家與其學說的對應，何者不相符？',opts:['道耳頓～倍比定律','普魯斯特～定比定律','卜利士利～命名「氧」氣','門得列夫～週期表'],ans:2,ex:'命名「氧氣」的是拉瓦節，卜利士利只是最早製造出氧氣的人。',lesson:3},
+  {q:'6. 下列有關鹼金族的敘述，何者正確？',opts:['與水作用可使溶液呈酸性，並釋出氧氣','與水作用可使溶液呈鹼性，並釋出氫氣','氧化物在水中使溶液呈酸性，並釋出氧氣','氧化物在水中使溶液呈鹼性，並釋出氫氣'],ans:1,ex:'鹼金族（如Na、K）與水反應生成氫氧化物（鹼性）＋氫氣（H₂）。',lesson:4},
+  {q:'7. 加熱某白色固體可以得到無色氣體及黑色殘餘物，則此固體為？',opts:['元素','化合物','混合物','可能為混合物，可能為化合物'],ans:3,ex:'化合物加熱可分解出多種物質；混合物加熱也可分離。只知道分解結果，無法確定是哪種。',lesson:0},
+  {q:'8. 承上題，若該白色固體有固定熔點，則此固體為？',opts:['元素','化合物','混合物','可能為混合物，可能為化合物'],ans:1,ex:'有固定熔點→純物質（排除混合物）。能分解出兩種物質→是化合物，不是元素。',lesson:0},
+  {q:'9. 下列有關石墨的描述，何者錯誤？',opts:['俗稱「黑鉛」','是可以導電的非金屬','可做為乾電池的負極','可做鉛筆的筆芯'],ans:2,ex:'石墨做乾電池的「正極」，不是負極。',lesson:6},
+  {q:'10. 根據鹼金族元素的熔點數據（Li熔點180°C、Na熔點98°C、K熔點63°C），加熱到1000°C，下列敘述何者正確？',opts:['這些元素全部都是氣態','鈉在1000°C還是固體','加熱到200°C，鉀和鈉都還是液體','加熱到700°C，鈉和鉀會是氣體，鋰是液體'],ans:3,ex:'Na沸點883°C、K沸點759°C，在700°C這兩個都是液體，還沒達到沸點。1000°C超過Na和K的沸點所以是氣體，但Li沸點1342°C，在1000°C還是液體。',lesson:5},
+  {q:'11. 下列敘述何者正確？',opts:['二氧化鈦是白色染料，也是製白漆及立可白的原料','銀的活性小，在火山地區配戴銀飾品無妨','鐵鋁合金密度小且堅硬，是製造飛機的理想材料','燃燒時應調整瓦斯與空氣比例，使火焰呈紅黃色'],ans:0,ex:'TiO₂確實是白色塗料和立可白的原料。銀在火山區會與硫化氫反應變黑；製飛機是鋁合金（非鐵鋁）；瓦斯完全燃燒應呈淡藍色。',lesson:6},
+  {q:'12. 市面上淨水器使用活性炭的主要目的是？',opts:['殺死水中細菌','與水中雜質產生化學反應','使礦物質溶出','吸附水中雜質和去除臭味'],ans:3,ex:'活性炭多孔，利用物理吸附去除雜質、脫色、除臭。它不殺菌，也不起化學反應。',lesson:6},
+  {q:'13. 鋁製品不易銹蝕的主要原因是？',opts:['鋁活性小','鋁不易氧化','氧化物緻密而不易脫落','表面易做防鏽處理'],ans:2,ex:'鋁活性其實很大，容易被氧化，但表面的氧化鋁（Al₂O₃）非常緻密且不易脫落，隔絕空氣保護內部。',lesson:6},
+  {q:'14. 已知3.5克的氮與2克的氧，恰好生成5.5克的一氧化二氮。則欲生成22克的一氧化二氮，需氮與氧各若干？',opts:['氮14克，氧8克','氮12克，氧10克','氮10克，氧12克','氮8克，氧14克'],ans:0,ex:'22÷5.5＝4倍，所以氮＝3.5×4＝14克，氧＝2×4＝8克。這就是定比定律的應用！',lesson:3},
+  {q:'15. 下列有關金屬的敘述，何者錯誤？',opts:['銀是日常生活中活性最小的金屬','銀是導電性及導熱性最良好的金屬','不鏽鋼是鋼中含有Ni及Cr的合金','鎢的熔點很高，可做電燈泡燈絲'],ans:0,ex:'日常生活中活性最小的金屬是金（Au），不是銀（Ag）。銀的活性比金稍大。',lesson:4},
+  {q:'16. 下列關於現用週期表的敘述，何者錯誤？',opts:['是依據門得列夫週期表設計出來的','是利用原子量的大小順序來排列','將目前已知的元素分為七個週期','同一直行的元素，其化學性質相似'],ans:1,ex:'現行週期表是依照「原子序」排列，門得列夫原來的週期表才是依「原子量」排列。',lesson:5},
+  {q:'17. 下列關於週期表各族的敘述，何者錯誤？',opts:['鹼金族位於週期表最左邊，也是最活潑的金屬元素','鹼土族元素因活性大，常以化合物存在於地殼中','鹵族元素的顏色都相同，也是最活潑的非金屬元素','VIIIA族又稱為惰氣或惰性氣體，位於週期表最右邊'],ans:2,ex:'鹵族元素顏色各不相同：Cl₂黃綠色、Br₂紅棕色、I₂紫黑色。顏色完全不同！',lesson:5},
+  {q:'18. 下列何者為同素異形體的例子？',opts:['氧氣和二氧化碳','水和雙氧水','鑽石和石墨','鑽石和食鹽'],ans:2,ex:'同素異形體是「同一種元素，不同形態」。鑽石和石墨都是由碳原子組成，但排列方式不同，性質完全不同。',lesson:6},
+];
+
+let quizSel = {};
+function buildQuiz() {
+  quizBuilt = true;
+  document.getElementById('quiz-container').innerHTML = qData.map((q,i)=>`
+    <div class="qcard" id="qc${i}">
+      <div class="qtxt">${q.q}</div>
+      ${q.opts.map((o,j)=>`
+        <div class="qopt" id="qo${i}_${j}" onclick="selOpt(${i},${j})">
+          <span class="qlabel">${'ABCD'[j]}.</span><span>${o}</span>
+        </div>`).join('')}
+      <div class="qexp" id="qe${i}"></div>
+    </div>`).join('');
+  document.getElementById('check-btn').disabled = true;
+}
+function selOpt(qi,oi) {
+  if(document.getElementById('qe'+qi).style.display==='block') return;
+  quizSel[qi] = oi;
+  for(let j=0;j<4;j++){
+    const el=document.getElementById(`qo${qi}_${j}`);
+    if(!el)continue;
+    el.className = j===oi ? 'qopt sel' : 'qopt';
+  }
+  document.getElementById('check-btn').disabled = Object.keys(quizSel).length < qData.length;
+}
+function checkQuiz() {
+  let correct=0;
+  qData.forEach((q,i)=>{
+    const sel=quizSel[i];
+    for(let j=0;j<q.opts.length;j++){
+      const el=document.getElementById(`qo${i}_${j}`);
+      if(!el)continue;
+      if(j===q.ans) el.className='qopt ok';
+      else if(j===sel&&sel!==q.ans) el.className='qopt no';
+      else el.className='qopt';
+    }
+    const isOk=sel===q.ans;
+    if(isOk)correct++;
+    const exp=document.getElementById('qe'+i);
+    exp.style.display='block';
+    exp.style.background=isOk?'#EAF3DE':'#FAECE7';
+    exp.style.color=isOk?'#27500A':'#712B13';
+    exp.innerHTML=(isOk?'✓ 答對！':'✗ 答錯，正確答案：'+('ABCD'[q.ans]))+'<br>'+q.ex;
+  });
+  const pct=Math.round(correct/qData.length*100);
+  const color=pct>=80?'#27500A':pct>=60?'#854F0B':'#993C1D';
+  const bg=pct>=80?'#EAF3DE':pct>=60?'#FAEEDA':'#FAECE7';
+  document.getElementById('quiz-score').innerHTML=
+    `<div style="background:${bg};border-radius:12px;padding:1rem;margin-bottom:1rem;">
+      <div style="font-size:20px;font-weight:500;color:${color};">${correct} / ${qData.length} 題正確（${pct}%）</div>
+      <div style="font-size:13px;color:${color};margin-top:4px;">${pct>=80?'非常好！整章掌握得很扎實。':pct>=60?'還不錯，把答錯的地方找到對應課程再複習一次！':'需要多加複習，從第一課重新看一遍。'}</div>
+    </div>`;
+  document.getElementById('check-btn').style.display='none';
+  document.getElementById('retry-btn').style.display='inline-block';
+}
+function retryQuiz(){
+  quizSel={}; quizBuilt=false;
+  document.getElementById('quiz-score').innerHTML='';
+  document.getElementById('check-btn').style.display='inline-block';
+  document.getElementById('retry-btn').style.display='none';
+  buildQuiz();
+}
+
+// ── GENERAL ──
+function showPanel(){}  // stub
+</script>
+</body>
+</html>

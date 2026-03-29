@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f5f4f0">
+<title>國中複習</title>
+<link rel="stylesheet" href="css/main.css">
+<style>
+  .math-color    { color: #1D4ED8; }
+  .physics-color { color: #6D28D9; }
+  .chem-color    { color: #065F46; }
+  .math-bg    { background: #EFF6FF; }
+  .physics-bg { background: #F5F3FF; }
+  .chem-bg    { background: #ECFDF5; }
+  .math-bar    { background: #2563EB; }
+  .physics-bar { background: #7C3AED; }
+  .chem-bar    { background: #059669; }
+  .subject-card:hover .subject-name { color: #1D4ED8; }
+  .subject-card[href*="physics"]:hover .subject-name { color: #6D28D9; }
+  .subject-card[href*="chemistry"]:hover .subject-name { color: #065F46; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="hero-site-name">複習教材</div>
+    <h1>國中理化 ＆ 數學</h1>
+    <p>選擇科目開始複習</p>
+  </div>
+
+  <div class="section-head">科目</div>
+
+  <div class="subject-cards">
+    <a href="math/" class="subject-card">
+      <div class="subject-icon math-bg">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round">
+          <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+      </div>
+      <div class="subject-info">
+        <div class="subject-name math-color">數學</div>
+        <div class="subject-meta">代數・幾何・統計・函數</div>
+        <div class="progress-bar" style="margin-top:8px;">
+          <div class="progress-fill math-bar" style="width:0%"></div>
+        </div>
+        <div style="font-size:11px;color:#c8c7bf;">尚未開始</div>
+      </div>
+      <div class="subject-arrow">›</div>
+    </a>
+
+    <a href="physics/" class="subject-card">
+      <div class="subject-icon physics-bg">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+        </svg>
+      </div>
+      <div class="subject-info">
+        <div class="subject-name physics-color">物理</div>
+        <div class="subject-meta">力學・光學・電學・熱學</div>
+        <div class="progress-bar" style="margin-top:8px;">
+          <div class="progress-fill physics-bar" style="width:0%"></div>
+        </div>
+        <div style="font-size:11px;color:#c8c7bf;">尚未開始</div>
+      </div>
+      <div class="subject-arrow">›</div>
+    </a>
+
+    <a href="chemistry/" class="subject-card">
+      <div class="subject-icon chem-bg">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#065F46" stroke-width="2" stroke-linecap="round">
+          <path d="M9 3h6l3 10H6L9 3z"/>
+          <path d="M6 13c0 4 2.5 7 6 7s6-3 6-7"/>
+        </svg>
+      </div>
+      <div class="subject-info">
+        <div class="subject-name chem-color">化學</div>
+        <div class="subject-meta">元素・化合物・化學反應・酸鹼</div>
+        <div class="progress-bar" style="margin-top:8px;">
+          <div class="progress-fill chem-bar" style="width:20%"></div>
+        </div>
+        <div style="font-size:11px;color:#059669;">第五章已完成</div>
+      </div>
+      <div class="subject-arrow">›</div>
+    </a>
+  </div>
+
+  <div class="page-footer">
+    每天一點點，考試不慌張 📚
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f5f4f0">
+<title>數學 — 國中複習</title>
+<link rel="stylesheet" href="../css/main.css">
+<style>
+  :root { --accent: #2563EB; --accent-bg: #EFF6FF; --accent-dark: #1D4ED8; }
+  .chapter-num {
+    font-size: 14px; font-weight: 600; color: var(--accent-dark);
+    background: var(--accent-bg); width: 40px; height: 40px;
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topnav">
+    <button class="back-btn" onclick="history.back()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="18" height="18">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+      首頁
+    </button>
+  </div>
+
+  <div class="page-header">
+    <div class="subject-tag" style="color:var(--accent);">科目</div>
+    <h1>數學</h1>
+    <div class="subtitle">代數・幾何・統計・函數</div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-num" style="color:var(--accent);">0</div>
+      <div class="stat-label">章節完成</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" style="color:#D97706;">0</div>
+      <div class="stat-label">段考解析</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" style="color:#888780;">—</div>
+      <div class="stat-label">章節待讀</div>
+    </div>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" style="background:var(--accent);width:0%"></div>
+  </div>
+
+  <div class="section-head">章節教材</div>
+  <div class="card-list">
+    <div class="item-card disabled" style="justify-content:center;padding:32px 16px;flex-direction:column;gap:8px;text-align:center;">
+      <div style="font-size:32px;">📐</div>
+      <div style="font-size:14px;font-weight:500;color:#5f5e5a;">數學章節尚未新增</div>
+      <div style="font-size:13px;color:#888780;">教材準備好後會出現在這裡</div>
+    </div>
+  </div>
+
+  <div class="section-head">段考解析</div>
+  <div class="card-list">
+    <div class="item-card disabled" style="justify-content:center;padding:32px 16px;flex-direction:column;gap:8px;text-align:center;">
+      <div style="font-size:32px;">📝</div>
+      <div style="font-size:14px;font-weight:500;color:#5f5e5a;">段考解析尚未新增</div>
+      <div style="font-size:13px;color:#888780;">教材準備好後會出現在這裡</div>
+    </div>
+  </div>
+
+  <div class="page-footer">數學 · 國中複習</div>
+</div>
+</body>
+</html>
